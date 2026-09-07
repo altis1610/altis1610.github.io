@@ -49,7 +49,7 @@
   </div>
   <div class="dt-sec">
     <h2 class="sec-h">方法</h2>
-    <p>我們攻擊三種目標架構——MFCC 管線、可學習 sinc 濾波器的 SincNet、raw-waveform CNN——用白盒梯度逆向：迭代修正合成輸入直到模型輸出符合目標語者，並比較傳統與滑動遮罩兩種演算法。防禦端採後訓練差分隱私層（top-k 取樣＋指數機制）。當 GAN 式攻擊出現震盪時，我開兩條平行路線——一邊診斷 GAN、一邊改寫成受限梯度優化——讓數據決定勝負，兩週內清掉瓶頸。</p>
+    <p>我們攻擊三種目標架構——MFCC 管線、可學習 sinc 濾波器的 SincNet、raw-waveform CNN——用白盒梯度逆向：迭代修正合成輸入直到模型輸出符合目標語者，並比較傳統與滑動遮罩兩種演算法。防禦端採後訓練差分隱私層（top-k 取樣＋指數機制）。GAN 式攻擊出現震盪時，我同時進行兩條路線：一邊診斷 GAN，一邊把攻擊改寫成受限梯度優化；兩週內以實驗結果比較兩者，選定受限梯度優化。</p>
     <figure>
       <img src="/assets/wispo-cover.png" alt="Experiment design and attack algorithm">
       <figcaption>圖一——實驗設計與攻擊演算法。</figcaption>
@@ -58,9 +58,9 @@
   <div class="dt-sec">
     <h2 class="sec-h">發現</h2>
     <div class="fgrid">
-      <div class="fbox"><div class="t">架構本身就是防線</div><p>深層 raw-waveform 模型最抗逆向；SincNet 在收斂與防禦間取得平衡；MFCC 太早丟棄資訊，洩漏得最快。</p></div>
-      <div class="fbox"><div class="t">防禦甜蜜點</div><p>1.6–2.0 秒的輸入長度，在辨識效能與抗逆向之間取得最佳平衡。</p></div>
-      <div class="fbox"><div class="t">差分隱私是放大器，不是護盾</div><p>DP 能強化本就穩健的架構，但救不了脆弱的 MFCC 基線。</p></div>
+      <div class="fbox"><div class="t">架構決定脆弱度</div><p>深層 raw-waveform 模型最抗逆向；SincNet 在收斂與防禦間取得平衡；MFCC 太早丟棄資訊，洩漏最快。</p></div>
+      <div class="fbox"><div class="t">輸入長度的平衡區間</div><p>1.6–2.0 秒的輸入長度，在辨識效能與抗逆向之間取得最佳平衡。</p></div>
+      <div class="fbox"><div class="t">差分隱私的適用條件</div><p>DP 能強化本就穩健的架構，對脆弱的 MFCC 基線幫助有限。</p></div>
       <div class="fbox"><div class="t">設計原則</div><p>綜合以上，為隱私保護的語者辨識系統提供架構層級的設計指引。</p></div>
     </div>
   </div>

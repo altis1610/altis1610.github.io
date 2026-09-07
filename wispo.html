@@ -49,7 +49,7 @@
   </div>
   <div class="dt-sec">
     <h2 class="sec-h">METHOD</h2>
-    <p>We attacked three target families — MFCC pipelines, SincNet with learnable sinc filters, and raw-waveform CNNs — with white-box, gradient-based inversion: iteratively refining a synthetic input until the model's output matches a target speaker, under traditional and sliding masking algorithms. Defense used a post-training differential-privacy layer (top-k sampling with the exponential mechanism). When our GAN-based attack oscillated, I ran two parallel tracks — diagnosing the GAN vs. reformulating as constrained gradient optimization — and let the data pick the winner, clearing the bottleneck in two weeks.</p>
+    <p>We attacked three target families — MFCC pipelines, SincNet with learnable sinc filters, and raw-waveform CNNs — with white-box, gradient-based inversion: iteratively refining a synthetic input until the model's output matches a target speaker, under traditional and sliding masking algorithms. Defense used a post-training differential-privacy layer (top-k sampling with the exponential mechanism). When our GAN-based attack oscillated, I ran two approaches in parallel — diagnosing the GAN, and reformulating the attack as constrained gradient optimization — compared them on experimental results within two weeks, and settled on constrained gradient optimization.</p>
     <figure>
       <img src="/assets/wispo-cover.png" alt="Experiment design and attack algorithm">
       <figcaption>Fig. 1 — Experiment design and attack algorithm.</figcaption>
@@ -58,9 +58,9 @@
   <div class="dt-sec">
     <h2 class="sec-h">FINDINGS</h2>
     <div class="fgrid">
-      <div class="fbox"><div class="t">Architecture is the defense</div><p>Deep raw-waveform models resist inversion best; SincNet balances convergence and defense; MFCC discards cues early and leaks easiest.</p></div>
-      <div class="fbox"><div class="t">A defensive sweet spot</div><p>Input durations of 1.6–2.0 s give the best trade-off between classification performance and inversion resistance.</p></div>
-      <div class="fbox"><div class="t">DP is an amplifier, not a shield</div><p>Differential privacy strengthens already-robust architectures but fails to rescue weak MFCC baselines.</p></div>
+      <div class="fbox"><div class="t">Architecture determines vulnerability</div><p>Deep raw-waveform models resist inversion best; SincNet balances convergence and defense; MFCC discards cues early and leaks easiest.</p></div>
+      <div class="fbox"><div class="t">The input-length trade-off</div><p>Input durations of 1.6–2.0 s give the best trade-off between classification performance and inversion resistance.</p></div>
+      <div class="fbox"><div class="t">Where differential privacy applies</div><p>Differential privacy strengthens already-robust architectures but offers little for weak MFCC baselines.</p></div>
       <div class="fbox"><div class="t">Design principles</div><p>Together these establish architecture-level guidance for building privacy-preserving speaker recognition.</p></div>
     </div>
   </div>
