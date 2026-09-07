@@ -226,3 +226,11 @@ figcaption { margin-top: 8px; font-size: 13.5px; color: #777; font-style: italic
 .sprow-lite { grid-template-columns: 300px minmax(0, 1fr) auto; }
 .m-lang { font-family: var(--mono); font-size: 13px; color: #444; border: 1px solid var(--mid); padding: 3px 10px; }
 .m-lang:hover { border-color: var(--accent); color: var(--accent); opacity: 1; }
+
+/* ---------- collapsible honors ---------- */
+details.fold summary { list-style: none; cursor: pointer; }
+details.fold summary::-webkit-details-marker { display: none; }
+details.fold .when-open { display: none; }
+details.fold[open] .when-open { display: inline; }
+details.fold[open] .when-closed { display: inline; }
+details.fold[open] summary .when-closed { display: none; }
