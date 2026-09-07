@@ -88,7 +88,14 @@ figcaption { margin-top: 8px; font-size: 13.5px; color: #777; font-style: italic
 .timeline .yr { font-family: var(--mono); font-size: 13px; color: var(--accent); padding-top: 3px; }
 
 /* ---------- top links (detail pages) ---------- */
-.toplinks { margin-top: 16px; display: flex; gap: 12px; flex-wrap: wrap; }
+.toplinks { margin-top: 26px; display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-solid {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--mono); font-size: 13.5px; font-weight: 500; letter-spacing: 0.04em;
+  color: #ffffff; background: var(--ink);
+  padding: 13px 26px;
+}
+.btn-solid:hover { background: var(--accent); color: #ffffff; opacity: 1; }
 
 /* ---------- side projects (full-width rows) ---------- */
 .sprow {
