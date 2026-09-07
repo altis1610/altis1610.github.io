@@ -87,6 +87,20 @@ figcaption { margin-top: 8px; font-size: 13.5px; color: #777; font-style: italic
 }
 .timeline .yr { font-family: var(--mono); font-size: 13px; color: var(--accent); padding-top: 3px; }
 
+/* ---------- top links (detail pages) ---------- */
+.toplinks { margin-top: 16px; display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* ---------- side projects (full-width rows) ---------- */
+.sprow {
+  display: grid; grid-template-columns: 300px minmax(0, 1fr) auto;
+  gap: 24px 48px; padding: 28px 0; border-bottom: 1px solid var(--hair);
+  align-items: start;
+}
+.sprow .name { font-size: 26px; font-weight: 600; line-height: 1.2; }
+.sprow .lang { margin-top: 8px; font-family: var(--mono); font-size: 12.5px; color: var(--dim); }
+.sprow p { font-size: 16.5px; line-height: 1.65; color: var(--body); text-wrap: pretty; max-width: 70ch; }
+.sprow p + p { margin-top: 10px; }
+
 /* ---------- home research cards ---------- */
 .rgrid { margin-top: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
 .rcard {
@@ -191,6 +205,7 @@ figcaption { margin-top: 8px; font-size: 13.5px; color: #777; font-style: italic
   .hero h1 { font-size: 42px; }
   .rgrid, .pgrid3, .pgrid2, .mgrid, .fgrid, .gallery { grid-template-columns: 1fr; }
   .rentry { grid-template-columns: 1fr; gap: 24px; }
+  .sprow { grid-template-columns: 1fr; gap: 14px; }
   .honors { column-count: 1; }
   .plist a { grid-template-columns: 92px 1fr auto; }
   .plist .cat { display: none; }
