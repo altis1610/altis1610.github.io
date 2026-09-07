@@ -16,6 +16,7 @@
   <a class="m-brand" href="/zh/index.html">ALTIS LIN</a>
   <div class="m-nav">
     <a href="/zh/research.html">研究</a>
+    <a href="/zh/projects.html" class="on">專案</a>
     <a href="/zh/activities.html">活動</a>
     <a href="/zh/teaching.html">教學</a>
     <a href="/zh/notes.html">筆記</a>
@@ -29,8 +30,8 @@
 
 <main>
 <div class="postw" style="padding-top: 56px; padding-bottom: 16px;">
-  <div class="crumbs"><a href="/zh/index.html">首頁</a> / <span class="here">BUG_TRACK</span></div>
-  <p class="kicker" style="margin-top: 24px;">程式專案 · Python · OpenCV · Tkinter GUI</p>
+  <div class="crumbs"><a href="/zh/index.html">首頁</a> / <a href="/zh/projects.html">專案</a> / <span class="here">BUG_TRACK</span></div>
+  <p class="kicker" style="margin-top: 24px;">專案 · Python · OpenCV · PyQt5 · FFmpeg</p>
   <h1 class="dt-h1">Bug_Track——野外生態影片事件偵測工具</h1>
   <p class="post-dek">為生物組的野外實驗寫的影片分析工具，自動找出捕食事件的時間點。</p>
   <div class="toplinks">
@@ -40,17 +41,16 @@
   <h2>設計動機</h2>
   <p>高二時，生物組的朋友在做野外觀察實驗：研究不同形狀的蜘蛛網在捕食效率上是否有差異。實驗方法是長時間錄製野外蜘蛛網的監控影片，再人工記錄每次捕食的發生與時間點。</p>
   <p>這個流程有三個問題。野外光照變化劇烈、背景干擾多，影像品質不穩定。能標註的昆蟲樣本太少，建不出監督式資料集，YOLO 這類需要訓練的偵測模型用不了。人工標註本身耗時，加上觀察疲勞和組員間的主觀判斷差異，標註結果常常不一致，數據可靠性因此打折。</p>
-  <h2>需求確認</h2>
-  <p>動手前我先和他把需求談清楚：標記要多精準、偵測的物件多大、測試資料量多少、計算效率要求到哪。規格先定下來，工具的設計才對得上實驗目標。</p>
   <h2>系統設計</h2>
-  <p>整體是一套以電腦視覺為核心的事件篩選流程。影片先沿時間軸切成分段，建立處理斷點，降低記憶體需求、提升穩定性。每段先經影像處理壓低光照變動的影響，再計算幀間差異偵測畫面中的動態。連續超過閾值的影格整合成單一事件區段，同一次捕食不會被記成好幾筆。</p>
-  <figure style="margin: 24px 0 0 0;"><img src="/assets/bugtrack-ui.png" alt="Bug_Track 分析介面"><figcaption>影片分段分析器的操作介面：輸入、參數、處理進度集中在同一個視窗。</figcaption></figure>
-  <p>操作介面做成圖形化：選影片、設參數、執行分析、檢視結果。非資訊背景的研究人員可以自己完成整個流程。</p>
+  <p>長影片先用 FFmpeg 沿時間軸切成固定長度的分段，逐段解碼分析，記憶體用量不隨影片長度成長。每段逐幀計算變化分數；偵測器做成可抽換的模組，共實作十種方法：稠密光流、稀疏光流、ORB 特徵匹配、幀間差異、直方圖差異、運動輪廓、區塊化局部差異、邊緣變化偵測、小物體光流變體，以及基於幀緩衝的時間差分。光照漂移、目標大小、移動速度等拍攝條件不同時，換方法只是改一個執行參數，不用改程式。</p>
+  <p>輸出是變化分數的時間序列：超過偵測閾值的區段標記為候選事件，連續超標的影格合併成單一事件區段，結果繪成圖表並可輸出 JSON 供後續統計。</p>
+  <figure style="margin: 24px 0 0 0;"><img src="/assets/bugtrack-ui.png" alt="Bug_Track 分析介面"><figcaption>影片分段分析器：輸入、分段長度、偵測閾值、分析方法與處理進度。</figcaption></figure>
+  <p>PyQt5 介面把管線參數——影片與輸出路徑、分段長度、偵測閾值、分析方法——直接開放在視窗上，並顯示切片與圖表產生進度。非資訊背景的研究人員可以自己跑完整個分析。</p>
   <h2>成果</h2>
   <p>人工標註時間大幅縮短，標註結果不再因觀察者而異，數據可靠性提高。程式碼公開在 GitHub。</p>
   </div>
   <div class="pager">
-    <a href="/zh/index.html">← 首頁</a>
+    <a href="/zh/projects.html">← 專案</a>
   </div>
 </div>
 </main>

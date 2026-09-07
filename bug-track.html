@@ -16,6 +16,7 @@
   <a class="m-brand" href="/index.html">ALTIS LIN</a>
   <div class="m-nav">
     <a href="/research.html">RESEARCH</a>
+    <a href="/projects.html" class="on">PROJECTS</a>
     <a href="/activities.html">ACTIVITIES</a>
     <a href="/teaching.html">TEACHING</a>
     <a href="/notes.html">NOTES</a>
@@ -29,8 +30,8 @@
 
 <main>
 <div class="postw" style="padding-top: 56px; padding-bottom: 16px;">
-  <div class="crumbs"><a href="/index.html">HOME</a> / <span class="here">BUG_TRACK</span></div>
-  <p class="kicker" style="margin-top: 24px;">SIDE PROJECTS · Python · OpenCV · Tkinter GUI</p>
+  <div class="crumbs"><a href="/index.html">HOME</a> / <a href="/projects.html">PROJECTS</a> / <span class="here">BUG_TRACK</span></div>
+  <p class="kicker" style="margin-top: 24px;">PROJECTS · Python · OpenCV · PyQt5 · FFmpeg</p>
   <h1 class="dt-h1">Bug_Track — event detection for field-biology videos</h1>
   <p class="post-dek">A video-analysis tool built for a biology field experiment: it finds the timestamps of predation events automatically.</p>
   <div class="toplinks">
@@ -40,17 +41,16 @@
   <h2>Motivation</h2>
   <p>In my second year of high school, a friend in the biology program was running a field experiment: whether spider webs of different shapes differ in predation efficiency. The method was to record webs with field cameras over long periods, then log every predation event and its timestamp by hand.</p>
   <p>That workflow had three problems. Outdoor lighting shifts hard and the background is noisy, so image quality is unstable. Labeled insect samples were too few to build a supervised dataset, which ruled out trainable detectors like YOLO. And manual annotation is slow; with observer fatigue and subjective judgment differing between members, the logged results were often inconsistent, which weakened the data.</p>
-  <h2>Requirements first</h2>
-  <p>Before writing any code I sat down with him and fixed the requirements: how precise the marks needed to be, how small the detected objects were, how much test data there was, and what computational budget the tool had. Settling the spec first kept the design aligned with the experiment.</p>
   <h2>System design</h2>
-  <p>The tool is an event-filtering pipeline built on computer vision. Videos are first split along the time axis into segments, which bounds memory use and keeps processing stable. Each segment goes through image processing to suppress lighting variation, then inter-frame differencing to detect motion. Consecutive frames above the threshold are merged into one event span, so a single catch is not logged as several separate hits.</p>
-  <figure style="margin: 24px 0 0 0;"><img src="/assets/bugtrack-ui.png" alt="Bug_Track analysis interface"><figcaption>The segment-analysis interface: input, parameters, and progress in one window.</figcaption></figure>
-  <p>The interface is a GUI: pick the video, set the parameters, run the analysis, inspect the results. Researchers without a CS background operate the whole flow themselves.</p>
+  <p>Long videos are first split into fixed-length segments with FFmpeg and decoded segment by segment, so memory use does not grow with video length. Each segment is scored frame by frame for change, with the detector implemented as a pluggable module — ten methods in total: dense and sparse optical flow, ORB feature matching, frame differencing, histogram differencing, motion contours, block-based local differencing, edge-change detection, a small-object flow variant, and temporal differencing over a frame buffer. Different shooting conditions — lighting drift, target size, movement speed — call for different methods, so the choice is a runtime parameter rather than a rewrite.</p>
+  <p>The output is a time series of change scores. Segments above the detection threshold are flagged as candidate events, consecutive above-threshold frames are merged into one event span, and the results are rendered as charts plus a JSON export for downstream statistics.</p>
+  <figure style="margin: 24px 0 0 0;"><img src="/assets/bugtrack-ui.png" alt="Bug_Track analysis interface"><figcaption>The segment-analysis interface: input, segment length, threshold, detection method, and progress.</figcaption></figure>
+  <p>The PyQt5 interface exposes the pipeline parameters — video and output paths, segment length, detection threshold, analysis method — and shows slicing and chart-generation progress, so researchers without a CS background run the analysis themselves.</p>
   <h2>Outcome</h2>
   <p>Manual annotation time dropped sharply, results no longer varied by observer, and the data became more reliable. The code is public on GitHub.</p>
   </div>
   <div class="pager">
-    <a href="/index.html">← HOME</a>
+    <a href="/projects.html">← ALL PROJECTS</a>
   </div>
 </div>
 </main>

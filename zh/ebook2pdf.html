@@ -16,6 +16,7 @@
   <a class="m-brand" href="/zh/index.html">ALTIS LIN</a>
   <div class="m-nav">
     <a href="/zh/research.html">研究</a>
+    <a href="/zh/projects.html" class="on">專案</a>
     <a href="/zh/activities.html">活動</a>
     <a href="/zh/teaching.html">教學</a>
     <a href="/zh/notes.html">筆記</a>
@@ -29,8 +30,8 @@
 
 <main>
 <div class="postw" style="padding-top: 56px; padding-bottom: 16px;">
-  <div class="crumbs"><a href="/zh/index.html">首頁</a> / <span class="here">EBOOK2PDF</span></div>
-  <p class="kicker" style="margin-top: 24px;">程式專案 · Python · automation</p>
+  <div class="crumbs"><a href="/zh/index.html">首頁</a> / <a href="/zh/projects.html">專案</a> / <span class="here">EBOOK2PDF</span></div>
+  <p class="kicker" style="margin-top: 24px;">專案 · Python · Selenium</p>
   <h1 class="dt-h1">ebook2pdf——線上電子書轉乾淨 PDF</h1>
   <p class="post-dek">自動翻頁、擷取、裁邊、合併的批次流程。</p>
   <div class="toplinks">
@@ -40,10 +41,10 @@
   <h2>設計動機</h2>
   <p>有些參考資料只提供線上分頁閱讀器：不能下載、不能畫記、離線讀不到。要正常使用這些資料，得先把它們變成 PDF。</p>
   <h2>系統設計</h2>
-  <p>程式自動翻頁瀏覽，逐頁擷取畫面，裁掉閱讀器的邊框與雜訊，最後合併成單一 PDF。使用者只需要設定起始頁面，其餘流程不需要人工介入。</p>
+  <p>工具用 Selenium 驅動 Chrome（ChromeDriver 自動下載）。使用者登入並翻到起始頁後，腳本接手：模擬翻頁、逐頁截圖、對每張截圖裁掉閱讀器的邊框與留白，最後把整批影像合併輸出成單一 PDF。輸出名稱與頁數是執行參數，設定一次就能跑完整本書，過程不需要人工介入。</p>
   </div>
   <div class="pager">
-    <a href="/zh/index.html">← 首頁</a>
+    <a href="/zh/projects.html">← 專案</a>
   </div>
 </div>
 </main>
