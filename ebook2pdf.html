@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ebook2pdf — Altis Lin</title>
-<meta name="description" content="Automatic page turning, capture, cropping, and compilation.">
+<meta name="description" content="A batch pipeline: automatic page turning, capture, cropping, and merging.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cg fill='%237a2c2c'%3E%3Crect x='3' y='13' width='3' height='6'/%3E%3Crect x='9' y='8' width='3' height='16'/%3E%3Crect x='15' y='4' width='3' height='24'/%3E%3Crect x='21' y='9' width='3' height='14'/%3E%3Crect x='27' y='14' width='3' height='4'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,16 +31,16 @@
 <div class="postw" style="padding-top: 56px; padding-bottom: 16px;">
   <div class="crumbs"><a href="/index.html">HOME</a> / <span class="here">EBOOK2PDF</span></div>
   <p class="kicker" style="margin-top: 24px;">SIDE PROJECTS · Python · automation</p>
-  <h1 class="dt-h1">ebook2pdf — paginated ebooks to clean PDFs</h1>
-  <p class="post-dek">Automatic page turning, capture, cropping, and compilation.</p>
+  <h1 class="dt-h1">ebook2pdf — online ebook readers to clean PDFs</h1>
+  <p class="post-dek">A batch pipeline: automatic page turning, capture, cropping, and merging.</p>
   <div class="toplinks">
     <a class="btn-line" href="https://github.com/altis1610/ebook2pdf">GITHUB ↗</a>
   </div>
   <div class="post-body">
-  <h2>What it does</h2>
-  <p>An automation tool that turns paginated web ebooks into clean, offline-readable PDFs with minimal user input:</p>
-  <ul><li>Navigates pages automatically</li><li>Captures each screen</li><li>Crops borders for a clean page</li><li>Compiles everything into a single high-quality PDF</li></ul>
-  <p>Built because reference material you can't annotate or read offline is reference material you won't use.</p>
+  <h2>Motivation</h2>
+  <p>Some reference material is only available in page-by-page online readers: no download, no annotation, no offline access. To use that material normally, it first has to become a PDF.</p>
+  <h2>System design</h2>
+  <p>The program turns the pages automatically, captures each screen, crops the reader chrome and margins, and merges everything into a single PDF. The user sets the starting page; the rest of the flow runs without intervention.</p>
   </div>
   <div class="pager">
     <a href="/index.html">← HOME</a>

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bug_Track — Altis Lin</title>
-<meta name="description" content="把數週的人工看片，換成電腦視覺自動掃描。">
+<meta name="description" content="為生物組的野外實驗寫的影片分析工具，自動找出捕食事件的時間點。">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cg fill='%237a2c2c'%3E%3Crect x='3' y='13' width='3' height='6'/%3E%3Crect x='9' y='8' width='3' height='16'/%3E%3Crect x='15' y='4' width='3' height='24'/%3E%3Crect x='21' y='9' width='3' height='14'/%3E%3Crect x='27' y='14' width='3' height='4'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,18 +31,23 @@
 <div class="postw" style="padding-top: 56px; padding-bottom: 16px;">
   <div class="crumbs"><a href="/zh/index.html">首頁</a> / <span class="here">BUG_TRACK</span></div>
   <p class="kicker" style="margin-top: 24px;">程式專案 · Python · OpenCV · Tkinter GUI</p>
-  <h1 class="dt-h1">Bug_Track——野外生態影片的事件偵測工具</h1>
-  <p class="post-dek">把數週的人工看片，換成電腦視覺自動掃描。</p>
+  <h1 class="dt-h1">Bug_Track——野外生態影片事件偵測工具</h1>
+  <p class="post-dek">為生物組的野外實驗寫的影片分析工具，自動找出捕食事件的時間點。</p>
   <div class="toplinks">
     <a class="btn-line" href="https://github.com/altis1610/Bug_Track">GITHUB ↗</a>
   </div>
   <div class="post-body">
-  <h2>它解決什麼問題</h2>
-  <p>生物組的朋友在研究蜘蛛網形狀是否影響捕食效率——這代表數週的野外監控影片要人工逐段看完，而且不同觀察者對「怎樣算一次捕食」常常意見不一。現成的偵測模型（如 YOLO）行不通：野外光照變化劇烈，標註好的昆蟲樣本又太少，根本不夠訓練。</p>
-  <h2>系統怎麼運作</h2>
-  <ul><li>長影片先切段處理，控制記憶體用量、維持穩定性</li><li>比較前先做影像處理，壓掉光照變化的干擾</li><li>計算幀間差異捕捉動態</li><li>連續超過閾值的影格合併成單一事件——一次捕食不會被數成五次</li><li>Tkinter 圖形介面讓沒有資訊背景的研究者也能自己調參數、驗證結果</li></ul>
+  <h2>設計動機</h2>
+  <p>高二時，生物組的朋友在做野外觀察實驗：研究不同形狀的蜘蛛網在捕食效率上是否有差異。實驗方法是長時間錄製野外蜘蛛網的監控影片，再人工記錄每次捕食的發生與時間點。</p>
+  <p>這個流程有三個問題。野外光照變化劇烈、背景干擾多，影像品質不穩定。能標註的昆蟲樣本太少，建不出監督式資料集，YOLO 這類需要訓練的偵測模型用不了。人工標註本身耗時，加上觀察疲勞和組員間的主觀判斷差異，標註結果常常不一致，數據可靠性因此打折。</p>
+  <h2>需求確認</h2>
+  <p>動手前我先和他把需求談清楚：標記要多精準、偵測的物件多大、測試資料量多少、計算效率要求到哪。規格先定下來，工具的設計才對得上實驗目標。</p>
+  <h2>系統設計</h2>
+  <p>整體是一套以電腦視覺為核心的事件篩選流程。影片先沿時間軸切成分段，建立處理斷點，降低記憶體需求、提升穩定性。每段先經影像處理壓低光照變動的影響，再計算幀間差異偵測畫面中的動態。連續超過閾值的影格整合成單一事件區段，同一次捕食不會被記成好幾筆。</p>
+  <figure style="margin: 24px 0 0 0;"><img src="/assets/bugtrack-ui.png" alt="Bug_Track 分析介面"><figcaption>影片分段分析器的操作介面：輸入、參數、處理進度集中在同一個視窗。</figcaption></figure>
+  <p>操作介面做成圖形化：選影片、設參數、執行分析、檢視結果。非資訊背景的研究人員可以自己完成整個流程。</p>
   <h2>成果</h2>
-  <p>這個工具取代了大部分人工標註，也終結了觀察者之間的判讀分歧——數字不再取決於「是誰在看影片」。</p>
+  <p>人工標註時間大幅縮短，標註結果不再因觀察者而異，數據可靠性提高。程式碼公開在 GitHub。</p>
   </div>
   <div class="pager">
     <a href="/zh/index.html">← 首頁</a>

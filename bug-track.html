@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bug_Track — Altis Lin</title>
-<meta name="description" content="Replacing weeks of manual footage review with computer vision.">
+<meta name="description" content="A video-analysis tool built for a biology field experiment: it finds the timestamps of predation events automatically.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cg fill='%237a2c2c'%3E%3Crect x='3' y='13' width='3' height='6'/%3E%3Crect x='9' y='8' width='3' height='16'/%3E%3Crect x='15' y='4' width='3' height='24'/%3E%3Crect x='21' y='9' width='3' height='14'/%3E%3Crect x='27' y='14' width='3' height='4'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,17 +32,22 @@
   <div class="crumbs"><a href="/index.html">HOME</a> / <span class="here">BUG_TRACK</span></div>
   <p class="kicker" style="margin-top: 24px;">SIDE PROJECTS · Python · OpenCV · Tkinter GUI</p>
   <h1 class="dt-h1">Bug_Track — event detection for field-biology videos</h1>
-  <p class="post-dek">Replacing weeks of manual footage review with computer vision.</p>
+  <p class="post-dek">A video-analysis tool built for a biology field experiment: it finds the timestamps of predation events automatically.</p>
   <div class="toplinks">
     <a class="btn-line" href="https://github.com/altis1610/Bug_Track">GITHUB ↗</a>
   </div>
   <div class="post-body">
-  <h2>The problem it solves</h2>
-  <p>A friend in the biology program was studying whether spider-web geometry affects predation efficiency — which meant weeks of camera footage reviewed by hand, with observers often disagreeing on what counted as an event. Off-the-shelf detectors like YOLO were out: outdoor lighting shifts wildly and there were too few labeled insect samples to train on.</p>
-  <h2>How it works</h2>
-  <ul><li>Splits long videos into segments to keep memory bounded and processing stable</li><li>Applies image processing to suppress lighting changes before comparison</li><li>Computes inter-frame differences to catch motion</li><li>Merges consecutive above-threshold frames into single events, so one catch is not counted five times</li><li>A Tkinter GUI lets researchers with no CS background tune parameters and verify results</li></ul>
+  <h2>Motivation</h2>
+  <p>In my second year of high school, a friend in the biology program was running a field experiment: whether spider webs of different shapes differ in predation efficiency. The method was to record webs with field cameras over long periods, then log every predation event and its timestamp by hand.</p>
+  <p>That workflow had three problems. Outdoor lighting shifts hard and the background is noisy, so image quality is unstable. Labeled insect samples were too few to build a supervised dataset, which ruled out trainable detectors like YOLO. And manual annotation is slow; with observer fatigue and subjective judgment differing between members, the logged results were often inconsistent, which weakened the data.</p>
+  <h2>Requirements first</h2>
+  <p>Before writing any code I sat down with him and fixed the requirements: how precise the marks needed to be, how small the detected objects were, how much test data there was, and what computational budget the tool had. Settling the spec first kept the design aligned with the experiment.</p>
+  <h2>System design</h2>
+  <p>The tool is an event-filtering pipeline built on computer vision. Videos are first split along the time axis into segments, which bounds memory use and keeps processing stable. Each segment goes through image processing to suppress lighting variation, then inter-frame differencing to detect motion. Consecutive frames above the threshold are merged into one event span, so a single catch is not logged as several separate hits.</p>
+  <figure style="margin: 24px 0 0 0;"><img src="/assets/bugtrack-ui.png" alt="Bug_Track analysis interface"><figcaption>The segment-analysis interface: input, parameters, and progress in one window.</figcaption></figure>
+  <p>The interface is a GUI: pick the video, set the parameters, run the analysis, inspect the results. Researchers without a CS background operate the whole flow themselves.</p>
   <h2>Outcome</h2>
-  <p>The tool replaced most of the manual annotation and settled the between-observer disagreement — the counts stopped depending on who watched the video.</p>
+  <p>Manual annotation time dropped sharply, results no longer varied by observer, and the data became more reliable. The code is public on GitHub.</p>
   </div>
   <div class="pager">
     <a href="/index.html">← HOME</a>
