@@ -251,3 +251,11 @@ details.fold .when-open { display: none; }
 details.fold[open] .when-open { display: inline; }
 details.fold[open] .when-closed { display: inline; }
 details.fold[open] summary .when-closed { display: none; }
+
+/* natural-ratio gallery row */
+.gallery-nat { display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; margin-top: 18px; }
+.gallery-nat figure { margin: 0; }
+.gallery-nat img { height: 340px; width: auto; max-width: 100%; }
+@media (max-width: 900px) {
+  .gallery-nat img { height: auto; width: 100%; }
+}
