@@ -3,119 +3,97 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Speaker-model inversion — Xuan-Yu Lin</title>
-<meta name="description" content="Analysis of inversion attack and defense strategies on speaker classification models. WISPO 2025 Silver Medal, Taiwan International Science Fair Third Award.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cg fill='%23F0B95C'%3E%3Crect x='3' y='13' width='3' height='6' rx='1.5'/%3E%3Crect x='9' y='8' width='3' height='16' rx='1.5'/%3E%3Crect x='15' y='4' width='3' height='24' rx='1.5'/%3E%3Crect x='21' y='9' width='3' height='14' rx='1.5'/%3E%3Crect x='27' y='14' width='3' height='4' rx='1.5'/%3E%3C/g%3E%3C/svg%3E">
+<title>Voice Model Inversion — Altis Lin</title>
+<meta name="description" content="Analysis of inversion attack and defense strategies on speaker classification models. WISPO 2025 Silver Medal, first author.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cg fill='%237a2c2c'%3E%3Crect x='3' y='13' width='3' height='6'/%3E%3Crect x='9' y='8' width='3' height='16'/%3E%3Crect x='15' y='4' width='3' height='24'/%3E%3Crect x='21' y='9' width='3' height='14'/%3E%3Crect x='27' y='14' width='3' height='4'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<nav class="topnav">
-  <div class="wrap">
-    <a class="home" href="index.html">← Xuan-Yu (Altis) Lin</a>
-    <a href="aphaspeak.html">Next project →</a>
+<nav class="masthead"><div class="container">
+  <a class="m-brand" href="index.html">ALTIS LIN</a>
+  <div class="m-nav">
+    <a href="research.html" class="on">RESEARCH</a>
+    <a href="activities.html">ACTIVITIES</a>
+    <a href="teaching.html">TEACHING</a>
+    <a href="notes.html">NOTES</a>
   </div>
-</nav>
+  <div class="m-links">
+    <a href="https://github.com/altis1610">GITHUB ↗</a>
+    <a href="mailto:altislin1610@gmail.com">EMAIL ↗</a>
+  </div>
+</div></nav>
 
-<main class="narrow">
-<article class="detail">
-  <div class="eyebrow">Research · 2023 – 2025 · first author</div>
-  <h1>Inversion attacks and defenses on speaker classification models</h1>
-  <p class="sub">How model architecture shapes vulnerability to voice-trait extraction — and when differential privacy actually protects.</p>
-  <div class="card-badges">
-    <span class="badge">WISPO 2025 · Silver Medal (Bali)</span>
-    <span class="badge">TISF 2025 · Third Award</span>
-    <span class="badge">National Science Fair · Honorable Mention</span>
-    <span class="badge">D-Link Innovation Award</span>
+<main>
+<div class="narrow" style="padding-top: 56px; padding-bottom: 16px;">
+  <div class="crumbs"><a href="index.html">HOME</a> / <a href="research.html">RESEARCH</a> / <span class="here">VOICE MODEL INVERSION</span></div>
+  <p class="kicker" style="margin-top: 24px;">2024 – 2025 · FIRST AUTHOR · CS &amp; INFORMATION</p>
+  <h1 class="dt-h1">Analysis of Inversion Attack and Defense Strategies on Speaker Classification Models</h1>
+  <div class="badges" style="margin-top: 18px;">
+    <span class="badge-solid">WISPO 2025 Silver</span>
+    <span class="badge-line">TISF Third Award</span>
+    <span class="badge-line">Honorable Mention, National Science Fair</span>
+    <span class="badge-line">D-Link Innovation Award</span>
   </div>
 
-  <div class="metrics">
-    <div class="metric"><div class="n">3</div><div class="l">front-ends compared</div></div>
-    <div class="metric"><div class="n">3</div><div class="l">public datasets</div></div>
-    <div class="metric"><div class="n">~50%</div><div class="l">DP-SGD success cut</div></div>
-    <div class="metric"><div class="n">1.6–2.0s</div><div class="l">costliest attack window</div></div>
+  <div class="dt-sec first">
+    <h2 class="sec-h">PROBLEM</h2>
+    <p>Deepfake voice scams need representative speaker features — and model inversion attacks can
+      reconstruct them directly from a trained recognition model, recovering timbre, rhythm, and
+      accent. Prior work rarely asked how the model's <em>architecture itself</em> governs this
+      vulnerability. As first author I led the research design and core experiments answering
+      exactly that.</p>
   </div>
 
-  <h2>The problem</h2>
-  <p>A model inversion attack uses gradient signals through a trained speaker classifier to generate
-    audio the system recognizes as a target speaker — exposing timbre, accent, and rhythm that can
-    seed convincing voice deepfakes. Defenses exist, but nobody had systematically measured how the
-    choice of front-end architecture changes the attack surface. That's what we set out to
-    quantify.</p>
-
-  <h2>Method</h2>
-  <p>We trained speaker classifiers over three input pipelines — raw waveform, SincNet, and MFCC —
-    on three public datasets (a 50-speaker Kaggle corpus, UrbanSound8K, and TIMIT with 463
-    speakers), then attacked each with two algorithms: a traditional attack that updates the whole
-    sample every step, and a sliding attack that perturbs one small time window at a time. A
-    differential-privacy output layer served as the defense under test, and attacks were scored by
-    time-to-success, success rate, and distance from real audio.</p>
-
-  <figure>
-    <img src="assets/wispo-cover.png" alt="Experiment design: end-to-end and non end-to-end speaker models, differential privacy layer, and the inversion attack loop">
-    <figcaption>Experiment design — model families, the inversion loop, and the DP defense layer.</figcaption>
-  </figure>
-
-  <h2>Findings</h2>
-  <ul>
-    <li><strong>Architecture matters most.</strong> MFCC front-ends are the most vulnerable;
-      end-to-end raw-waveform models are the hardest to invert, with SincNet in between. Feature
-      size tells the story: inverting 350 MFCC values is far easier than 245,760 raw samples.</li>
-    <li><strong>Input length is a defense knob.</strong> Attack cost peaks for 1.6–2.0s clips;
-      sliding attacks win on short audio, traditional attacks on long audio.</li>
-    <li><strong>DP is not a cure-all.</strong> DP-SGD roughly halves attack success on raw/SincNet
-      models but does little for MFCC — pairing DP with a weak architecture buys false comfort.</li>
-    <li><strong>Deeper models resist better.</strong> Added capacity raises attack time and drives
-      sliding-attack success rates down fastest.</li>
-  </ul>
-
-  <div class="fig-row">
+  <div class="dt-sec">
+    <h2 class="sec-h">METHOD</h2>
+    <p>We attacked three target families — MFCC pipelines, SincNet with learnable sinc filters, and
+      raw-waveform CNNs — with white-box, gradient-based inversion: iteratively refining a synthetic
+      input until the model's output matches a target speaker, under traditional and sliding masking
+      algorithms. Defense used a post-training differential-privacy layer (top-k sampling with the
+      exponential mechanism). When our GAN-based attack oscillated, I ran two parallel tracks —
+      diagnosing the GAN vs. reformulating as constrained gradient optimization — and let the data
+      pick the winner, clearing the bottleneck in two weeks.</p>
     <figure>
-      <img src="assets/wispo-dp.png" alt="Differential privacy benchmark: attack time and success rate with and without DP across architectures">
-      <figcaption>DP benchmark — strong with raw/SincNet, weak with MFCC.</figcaption>
-    </figure>
-    <figure>
-      <img src="assets/wispo-length.png" alt="Attack performance versus audio length showing highest cost at 1.6 to 2.0 seconds">
-      <figcaption>Attack cost vs input length.</figcaption>
+      <img src="assets/wispo-cover.png" alt="Experiment design and attack algorithm">
+      <figcaption>Fig. 1 — Experiment design and attack algorithm.</figcaption>
     </figure>
   </div>
 
-  <h2>Debugging story</h2>
-  <p>Midway, a GAN-based attack stalled: slow convergence and oscillating loss. Instead of tuning
-    blindly, we split into two parallel tracks — a diagnosis track (loss-sensitivity analysis,
-    objective re-weighting, overfitting checks across validation splits) and a simplification track
-    that recast the attack as constrained optimization with direct gradient refinement on the
-    input. The simpler formulation proved more stable and interpretable, and became the final
-    method. That two-track habit — diagnose in place while testing a cheaper formulation — is the
-    most transferable thing this project taught me.</p>
-
-  <div class="photo-row">
-    <figure>
-      <img src="assets/wispo-tisf.jpg" alt="Presenting the inversion attack research at the Taiwan International Science Fair">
-      <figcaption>Taiwan International Science Fair 2025.</figcaption>
-    </figure>
+  <div class="dt-sec">
+    <h2 class="sec-h">FINDINGS</h2>
+    <div class="fgrid">
+      <div class="fbox"><div class="t">Architecture is the defense</div><p>Deep raw-waveform models resist inversion best; SincNet balances convergence and defense; MFCC discards cues early and leaks easiest.</p></div>
+      <div class="fbox"><div class="t">A defensive sweet spot</div><p>Input durations of 1.6–2.0 s give the best trade-off between classification performance and inversion resistance.</p></div>
+      <div class="fbox"><div class="t">DP is an amplifier, not a shield</div><p>Differential privacy strengthens already-robust architectures but fails to rescue weak MFCC baselines.</p></div>
+      <div class="fbox"><div class="t">Design principles</div><p>Together these establish architecture-level guidance for building privacy-preserving speaker recognition.</p></div>
+    </div>
   </div>
 
-  <div class="doclinks">
-    <a href="assets/wispo-paper.pdf">Full paper (PDF)</a>
+  <div class="dt-sec">
+    <h2 class="sec-h">GALLERY</h2>
+    <div class="gallery">
+      <figure><img src="assets/wispo-tisf.jpg" alt="Presenting at the Taiwan International Science Fair" style="object-position: top;"><figcaption>Taiwan International Science Fair 2025.</figcaption></figure>
+    </div>
+  </div>
+
+  <div class="dt-sec">
+    <h2 class="sec-h">MATERIALS</h2>
+    <p style="margin-top: 18px;"><a class="btn-line" href="assets/wispo-paper.pdf">FULL PAPER (PDF) ↗</a></p>
   </div>
 
   <div class="pager">
-    <a href="index.html">← Home</a>
-    <a href="aphaspeak.html">AphaSpeak →</a>
+    <a href="research.html">← ALL RESEARCH</a>
+    <a href="aphaspeak.html">NEXT: APHASPEAK →</a>
   </div>
-</article>
+</div>
 </main>
-
-<footer class="site">
-  <div class="wrap">
-    <span>© 2026 Xuan-Yu Lin</span>
-    <span><a href="mailto:altislin1610@gmail.com">email</a> · <a href="https://github.com/altis1610">github</a></span>
-  </div>
-</footer>
-
+<footer class="sitefoot"><div class="container">
+  <span>altislin1610@gmail.com</span>
+  <span>github.com/altis1610</span>
+  <span>Hualien → Taipei, Taiwan</span>
+</div></footer>
 </body>
 </html>
