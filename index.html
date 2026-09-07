@@ -11,192 +11,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --paper: #FBFAF7;
-    --ink: #1A2332;
-    --muted: #5B6472;
-    --signal: #1F4FBF;
-    --mist: #E4E1D8;
-    --card: #FFFFFF;
-    --serif: "Newsreader", Georgia, serif;
-    --sans: "IBM Plex Sans", -apple-system, "Helvetica Neue", sans-serif;
-    --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: var(--sans);
-    font-size: 16.5px;
-    line-height: 1.65;
-    -webkit-font-smoothing: antialiased;
-  }
-  a { color: var(--signal); text-decoration: none; }
-  a:hover { text-decoration: underline; text-underline-offset: 3px; }
-  a:focus-visible, button:focus-visible {
-    outline: 2px solid var(--signal);
-    outline-offset: 3px;
-    border-radius: 2px;
-  }
-  .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
-
-  /* ---------- hero ---------- */
-  header { padding: 72px 0 0; }
-  .hero { display: flex; gap: 36px; align-items: flex-start; }
-  .hero-photo {
-    width: 128px; height: 160px; object-fit: cover;
-    border-radius: 6px; border: 1px solid var(--mist);
-    flex-shrink: 0;
-  }
-  h1 {
-    font-family: var(--serif);
-    font-weight: 500;
-    font-size: clamp(34px, 5.5vw, 46px);
-    letter-spacing: -0.01em;
-    line-height: 1.1;
-  }
-  .hero-role {
-    margin-top: 10px;
-    font-size: 17px;
-    color: var(--muted);
-    max-width: 56ch;
-  }
-  .hero-role strong { color: var(--ink); font-weight: 500; }
-  .hero-links {
-    margin-top: 18px;
-    display: flex; flex-wrap: wrap; gap: 8px 22px;
-    font-family: var(--mono); font-size: 13.5px;
-  }
-  .hero-links span { color: var(--muted); }
-
-  /* ---------- waveform signature ---------- */
-  .wave { margin: 44px 0 0; overflow: hidden; }
-  .wave svg { display: block; width: 100%; height: 64px; }
-  .wave .bar { transform-origin: center; }
-  @media (prefers-reduced-motion: no-preference) {
-    .wave .bar { animation: rise 0.7s cubic-bezier(.2,.7,.3,1) backwards; }
-    @keyframes rise { from { transform: scaleY(0.08); opacity: 0.3; } }
-  }
-  .wave-caption {
-    font-family: var(--mono); font-size: 12px; color: var(--muted);
-    display: flex; justify-content: space-between;
-    padding: 6px 2px 0;
-  }
-
-  /* ---------- sections ---------- */
-  section { padding: 56px 0 0; }
-  section:last-of-type { padding-bottom: 24px; }
-  .eyebrow {
-    font-family: var(--mono);
-    font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--signal);
-    margin-bottom: 22px;
-  }
-  h2 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-
-  /* research entries */
-  .entry {
-    background: var(--card);
-    border: 1px solid var(--mist);
-    border-radius: 10px;
-    padding: 30px 32px 28px;
-  }
-  .entry + .entry { margin-top: 22px; }
-  .entry h3 {
-    font-family: var(--serif);
-    font-weight: 600;
-    font-size: 25px;
-    line-height: 1.25;
-  }
-  .entry .sub { color: var(--muted); font-size: 15px; margin-top: 3px; }
-  .entry .venues {
-    margin-top: 12px;
-    font-family: var(--mono); font-size: 12.5px; line-height: 1.9;
-    color: var(--ink);
-  }
-  .entry .venues b { color: var(--ink); font-weight: 600; }
-  .metrics {
-    display: flex; flex-wrap: wrap; gap: 10px 28px;
-    margin: 18px 0 4px;
-    padding: 14px 18px;
-    background: var(--paper);
-    border-radius: 7px;
-    font-family: var(--mono);
-  }
-  .metric .n { font-size: 19px; font-weight: 500; color: var(--signal); }
-  .metric .l { font-size: 11.5px; color: var(--muted); letter-spacing: 0.03em; }
-  .entry p.desc { margin-top: 14px; }
-  .entry ul { margin: 12px 0 0 19px; }
-  .entry li { margin-top: 8px; }
-  .entry li::marker { color: var(--signal); }
-  .entry .links {
-    margin-top: 18px;
-    display: flex; flex-wrap: wrap; gap: 18px;
-    font-family: var(--mono); font-size: 13.5px;
-  }
-
-  /* awards table */
-  table { width: 100%; border-collapse: collapse; }
-  td { padding: 9px 0; border-bottom: 1px solid var(--mist); vertical-align: top; }
-  tr:last-child td { border-bottom: none; }
-  td.yr {
-    font-family: var(--mono); font-size: 13.5px; color: var(--muted);
-    width: 62px; padding-right: 16px; white-space: nowrap;
-  }
-  td.award b { font-weight: 600; }
-  td.award span { color: var(--muted); }
-
-  /* projects */
-  .proj { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-  .proj a.card {
-    display: block; color: inherit;
-    background: var(--card); border: 1px solid var(--mist); border-radius: 10px;
-    padding: 20px 22px;
-    transition: border-color 0.15s;
-  }
-  .proj a.card:hover { text-decoration: none; border-color: var(--signal); }
-  .proj .name { font-family: var(--mono); font-size: 14.5px; font-weight: 500; color: var(--signal); }
-  .proj p { margin-top: 7px; font-size: 14.5px; color: var(--muted); line-height: 1.55; }
-
-  /* two-col info */
-  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-  .cols h4 {
-    font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.14em;
-    text-transform: uppercase; color: var(--signal); font-weight: 500;
-    margin-bottom: 14px;
-  }
-  .cols ul { list-style: none; }
-  .cols li { padding: 7px 0; border-bottom: 1px solid var(--mist); font-size: 15px; }
-  .cols li:last-child { border-bottom: none; }
-  .cols li span { color: var(--muted); }
-
-  footer {
-    margin-top: 64px;
-    border-top: 1px solid var(--mist);
-    padding: 28px 0 48px;
-    font-family: var(--mono); font-size: 13px; color: var(--muted);
-    display: flex; flex-wrap: wrap; gap: 10px 24px; justify-content: space-between;
-  }
-
-  @media (max-width: 640px) {
-    header { padding-top: 48px; }
-    .hero { gap: 22px; }
-    .hero-photo { width: 96px; height: 120px; }
-    .entry { padding: 24px 20px; }
-    .proj, .cols { grid-template-columns: 1fr; }
-    .cols { gap: 32px; }
-  }
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header class="wrap">
+<header class="hero-wrap wrap">
   <div class="hero">
     <img class="hero-photo" src="assets/photo.jpg" alt="Portrait of Xuan-Yu Lin">
     <div>
-      <h1>Xuan-Yu (Altis) Lin</h1>
+      <h1 class="site-name">Xuan-Yu (Altis) Lin</h1>
       <p class="hero-role">CS undergraduate at <strong>National Taiwan University</strong> (B.S. '30).
         I build speech systems and break them — multimodal assistive communication for aphasia,
         and model-inversion attacks on speaker recognition.</p>
@@ -218,73 +41,73 @@
 
 <section id="research">
   <div class="eyebrow">Research</div>
-  <h2>Research</h2>
+  <h2 class="sr">Research</h2>
 
-  <article class="entry">
-    <h3>AphaSpeak — multimodal communication assistant for non-fluent aphasia</h3>
-    <p class="sub">2024 – 2026 · two-person team · advised by science-fair mentors, clinical input from neurologists</p>
-    <div class="venues">
-      <b>ISEF 2026</b> — Taiwan delegation &nbsp;·&nbsp; <b>Taiwan Int'l Science Fair 2026</b> — First Award, CS &amp; Information Engineering<br>
-      65th National Science Fair — 3rd Prize &nbsp;·&nbsp; Microsoft Young Hero Award &nbsp;·&nbsp; Corning Innovation Award
+  <a class="cardlink" href="aphaspeak.html">
+    <div class="card-cover"><img src="assets/apha-cover.png" alt="AphaSpeak system design diagram"></div>
+    <div class="card-body">
+      <div class="card-badges">
+        <span class="badge">ISEF 2026 · Taiwan delegation</span>
+        <span class="badge">TISF 2026 · First Award</span>
+        <span class="badge">National Science Fair · 3rd Prize</span>
+        <span class="badge">Microsoft Young Hero Award</span>
+      </div>
+      <h3>AphaSpeak</h3>
+      <p class="tag">A multimodal phone app that reconstructs what a person with non-fluent aphasia
+        is trying to say — fusing speech, lip reading, gesture, and scene context into ranked
+        candidate sentences.</p>
+      <div class="card-metrics">
+        <div><b>0.91</b> <span>BERT cos-sim</span></div>
+        <div><b>+10%</b> <span>vs text-only LLM</span></div>
+        <div><b>18s → &lt;4s</b> <span>latency</span></div>
+        <div><b>+4%</b> <span>student over teacher</span></div>
+      </div>
+      <div class="card-more">Read the project →</div>
     </div>
-    <div class="metrics">
-      <div class="metric"><div class="n">0.91</div><div class="l">BERT cos-sim</div></div>
-      <div class="metric"><div class="n">+10%</div><div class="l">vs text-only LLM</div></div>
-      <div class="metric"><div class="n">18s → &lt;4s</div><div class="l">end-to-end latency</div></div>
-      <div class="metric"><div class="n">+4%</div><div class="l">student over teacher</div></div>
-    </div>
-    <p class="desc">A phone-based system that reconstructs what a person with Broca's or transcortical
-      motor aphasia is trying to say. It fuses speech, lip-based visual speech recognition (ViSpeR),
-      gestures and facial expression, scene images, and conversation history into ranked candidate
-      sentences the user can pick and speak aloud.</p>
-    <ul>
-      <li><strong>Post-training:</strong> designed a choice-filtered distillation recipe — inject the
-        reference sentence into the candidate list, re-rank by semantic similarity, drop low-quality
-        samples — then fine-tuned a 14B model with QLoRA. The student beats its Gemini 2.5 Flash
-        teacher by ~4% on this task.</li>
-      <li><strong>Data augmentation:</strong> simulated aphasic speech by using attention scores to
-        keep each sentence's semantic skeleton and degrade secondary words, matching clinical corpora
-        far better than random masking.</li>
-      <li><strong>Systems:</strong> cut latency from 18s to under 4s with async WebSocket streaming,
-        three-tier priority queues, multiprocessing around Python's GIL, and CTC greedy decoding with
-        mixed precision for the AVSR path.</li>
-      <li>IRB-supervised pilot with a regional hospital in progress.</li>
-    </ul>
-    <div class="links">
-      <a href="assets/aphaspeak-poster.pdf">Poster (PDF)</a>
-    </div>
-  </article>
+  </a>
 
-  <article class="entry">
-    <h3>Inversion attacks and defenses on speaker classification models</h3>
-    <p class="sub">2023 – 2025 · first author</p>
-    <div class="venues">
-      <b>WISPO 2025</b> — Silver Medal (Bali, Indonesia) &nbsp;·&nbsp; <b>Taiwan Int'l Science Fair 2025</b> — Third Award<br>
-      64th National Science Fair — Honorable Mention &nbsp;·&nbsp; D-Link Smart Living Innovation Award
+  <a class="cardlink" href="wispo.html">
+    <div class="card-cover"><img src="assets/wispo-cover.png" alt="Model inversion attack experiment design diagram"></div>
+    <div class="card-body">
+      <div class="card-badges">
+        <span class="badge">WISPO 2025 · Silver Medal</span>
+        <span class="badge">TISF 2025 · Third Award</span>
+        <span class="badge">First author</span>
+      </div>
+      <h3>Inversion attacks on speaker models</h3>
+      <p class="tag">Gradient-based model inversion can steal a speaker's vocal traits from a trained
+        classifier. We measured how architecture shapes that vulnerability — and when differential
+        privacy actually helps.</p>
+      <div class="card-metrics">
+        <div><b>3</b> <span>front-ends compared</span></div>
+        <div><b>~50%</b> <span>DP-SGD success cut</span></div>
+        <div><b>1.6–2.0s</b> <span>costliest attack window</span></div>
+      </div>
+      <div class="card-more">Read the project →</div>
     </div>
-    <p class="desc">Gradient-based model inversion can recover a speaker's vocal traits from a trained
-      classifier — raw material for voice deepfakes. We measured how architecture shapes that
-      vulnerability and when differential privacy actually helps.</p>
-    <ul>
-      <li>Trained speaker classifiers over three input pipelines — raw waveform, SincNet, and MFCC —
-        on three public datasets; implemented both whole-clip and sliding-window inversion attacks.</li>
-      <li><strong>Findings:</strong> MFCC front-ends are the most vulnerable and raw-waveform
-        end-to-end models the most robust; attacks cost the most on 1.6–2.0s inputs; DP-SGD roughly
-        halves attack success on raw/SincNet models but does little for MFCC.</li>
-      <li>When a GAN-based attack stalled with oscillating loss, ran a loss-sensitivity diagnosis in
-        parallel with a simpler constrained-optimization track — direct gradient refinement proved
-        more stable and became the final method.</li>
-    </ul>
-    <div class="links">
-      <a href="assets/wispo-paper.pdf">Paper (PDF)</a>
-    </div>
-  </article>
+  </a>
+</section>
+
+<section id="projects">
+  <div class="eyebrow">Side projects</div>
+  <h2 class="sr">Side projects</h2>
+  <div class="proj">
+    <a class="card" href="https://github.com/altis1610/Bug_Track">
+      <div class="name">Bug_Track ↗</div>
+      <p>Computer-vision tool that finds predation events in long field recordings of spider webs —
+        frame differencing, event segmentation, and a GUI so biologists can verify results without code.</p>
+    </a>
+    <a class="card" href="https://github.com/altis1610/ebook2pdf">
+      <div class="name">ebook2pdf ↗</div>
+      <p>Automation that captures paginated ebooks, trims borders, and compiles clean PDFs.</p>
+    </a>
+  </div>
 </section>
 
 <section id="awards">
   <div class="eyebrow">Selected awards</div>
-  <h2>Selected awards</h2>
-  <table>
+  <h2 class="sr">Selected awards</h2>
+  <table class="awards">
     <tr><td class="yr">2026</td><td class="award"><b>ISEF Taiwan delegation</b> &amp; Taiwan International Science Fair — First Award <span>· AphaSpeak</span></td></tr>
     <tr><td class="yr">2025</td><td class="award"><b>WISPO Silver Medal</b>, World Innovative Science Project Olympiad <span>· speaker-model inversion</span></td></tr>
     <tr><td class="yr">2025</td><td class="award">65th National Science Fair — <b>3rd Prize</b>, Microsoft Young Hero Award, Corning Innovation Award <span>· AphaSpeak</span></td></tr>
@@ -296,25 +119,9 @@
   </table>
 </section>
 
-<section id="projects">
-  <div class="eyebrow">Side projects</div>
-  <h2>Side projects</h2>
-  <div class="proj">
-    <a class="card" href="https://github.com/altis1610/Bug_Track">
-      <div class="name">Bug_Track</div>
-      <p>Computer-vision tool that finds predation events in long field recordings of spider webs —
-        frame differencing, event segmentation, and a GUI so biologists can verify results without code.</p>
-    </a>
-    <a class="card" href="https://github.com/altis1610/ebook2pdf">
-      <div class="name">ebook2pdf</div>
-      <p>Automation that captures paginated ebooks, trims borders, and compiles clean PDFs.</p>
-    </a>
-  </div>
-</section>
-
 <section id="teaching">
   <div class="eyebrow">Teaching &amp; community</div>
-  <h2>Teaching and community</h2>
+  <h2 class="sr">Teaching and community</h2>
   <div class="cols">
     <div>
       <h4>Teaching</h4>
@@ -340,13 +147,14 @@
 
 </main>
 
-<footer class="wrap">
-  <span>© 2026 Xuan-Yu Lin</span>
-  <span><a href="mailto:altislin1610@gmail.com">email</a> · <a href="https://github.com/altis1610">github</a></span>
+<footer class="site">
+  <div class="wrap">
+    <span>© 2026 Xuan-Yu Lin</span>
+    <span><a href="mailto:altislin1610@gmail.com">email</a> · <a href="https://github.com/altis1610">github</a></span>
+  </div>
 </footer>
 
 <script>
-  // Signature waveform: fragmented bars (left) settling into a smooth wave (right).
   (function () {
     const svg = document.getElementById('wavesvg');
     const W = 880, H = 64, mid = H / 2, N = 96;
@@ -355,8 +163,8 @@
     for (let i = 0; i < N; i++) {
       const t = i / (N - 1);
       const x = 6 + t * (W - 12);
-      const noise = seed[i % seed.length] * (1 - t) * (1 - t);      // chaos fades out
-      const wavey = (0.5 + 0.42 * Math.sin(i * 0.55)) * t * t;      // smooth wave fades in
+      const noise = seed[i % seed.length] * (1 - t) * (1 - t);
+      const wavey = (0.5 + 0.42 * Math.sin(i * 0.55)) * t * t;
       const h = Math.max(3, (noise + wavey) * (H - 10));
       d += `<rect class="bar" x="${(x - 2.1).toFixed(1)}" y="${(mid - h / 2).toFixed(1)}" width="4.2" height="${h.toFixed(1)}" rx="2.1" fill="${t < 0.5 ? '#9AA3B2' : '#1F4FBF'}" opacity="${(0.45 + 0.55 * t).toFixed(2)}" style="animation-delay:${(i * 9)}ms"/>`;
     }

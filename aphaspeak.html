@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AphaSpeak — Xuan-Yu Lin</title>
+<meta name="description" content="AphaSpeak: a multimodal communication assistant for non-fluent aphasia. ISEF 2026 Taiwan delegation, Taiwan International Science Fair First Award.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cg fill='%231F4FBF'%3E%3Crect x='3' y='13' width='3' height='6' rx='1.5'/%3E%3Crect x='9' y='8' width='3' height='16' rx='1.5'/%3E%3Crect x='15' y='4' width='3' height='24' rx='1.5'/%3E%3Crect x='21' y='9' width='3' height='14' rx='1.5'/%3E%3Crect x='27' y='14' width='3' height='4' rx='1.5'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="wrap">
+    <a class="home" href="index.html">← Xuan-Yu (Altis) Lin</a>
+    <a href="wispo.html">Next project →</a>
+  </div>
+</nav>
+
+<main class="wrap">
+<article class="detail">
+  <div class="eyebrow">Research · 2024 – 2026</div>
+  <h1>AphaSpeak — multimodal communication assistant for non-fluent aphasia</h1>
+  <p class="sub">Two-person team · clinical input from neurologists · IRB-supervised hospital pilot in progress</p>
+  <div class="card-badges">
+    <span class="badge">ISEF 2026 · Taiwan delegation</span>
+    <span class="badge">TISF 2026 · First Award, CS &amp; IE</span>
+    <span class="badge">National Science Fair · 3rd Prize</span>
+    <span class="badge">Microsoft Young Hero Award</span>
+    <span class="badge">Corning Innovation Award</span>
+  </div>
+
+  <div class="metrics">
+    <div class="metric"><div class="n">0.91</div><div class="l">BERT cos-sim</div></div>
+    <div class="metric"><div class="n">+10%</div><div class="l">vs text-only LLM</div></div>
+    <div class="metric"><div class="n">18s → &lt;4s</div><div class="l">end-to-end latency</div></div>
+    <div class="metric"><div class="n">+4%</div><div class="l">student over teacher</div></div>
+    <div class="metric"><div class="n">80%</div><div class="l">top-3 accuracy</div></div>
+  </div>
+
+  <h2>The problem</h2>
+  <p>People with Broca's or transcortical motor aphasia understand language but produce fragmented,
+    error-filled speech. Text-only LLMs trained on clean text lack the cues to recover their intent,
+    and traditional picture-card AAC tools are slow and need heavy training. The missing signal is
+    everywhere except the transcript: lips, gestures, facial expression, the scene, and the
+    conversation itself.</p>
+
+  <h2>How it works</h2>
+  <p>AphaSpeak runs on a phone and uses both cameras plus the microphone. Ambient audio and scene
+    images build conversational context; the front camera feeds two parallel pipelines — a
+    high-frequency one (ORB keyframe extraction → gesture and emotion classifiers) and a
+    high-detail one (keyframes stitched into a film strip the LLM sees directly). Whisper and
+    lip-based visual speech recognition (ViSpeR) cross-check each other on unclear phonemes. All
+    features fuse into a prompt, and the model returns candidate sentences ranked by confidence for
+    the user to pick and speak aloud.</p>
+
+  <figure>
+    <img src="assets/apha-cover.png" alt="AphaSpeak system design: contextual and scene information, expression behavior pipelines, and speech representation feeding an LLM">
+    <figcaption>System design — three feature groups fuse into ranked candidate sentences.</figcaption>
+  </figure>
+
+  <h2>What I built</h2>
+  <ul>
+    <li><strong>Post-training:</strong> designed a choice-filtered distillation recipe — inject the
+      reference sentence into the candidate list, re-rank by semantic similarity, drop low-quality
+      samples — then fine-tuned a 14B model with QLoRA. The student beats its Gemini 2.5 Flash
+      teacher by ~4% on this task, enabling low-cost local deployment.</li>
+    <li><strong>Data augmentation:</strong> simulated aphasic speech by using attention scores to keep
+      each sentence's semantic skeleton and degrade secondary words — much closer to clinical
+      corpora than random masking.</li>
+    <li><strong>Systems:</strong> cut latency from 18s to under 4s with async WebSocket streaming,
+      three-tier priority queues, multiprocessing around Python's GIL, and CTC greedy decoding with
+      mixed precision on the AVSR path.</li>
+    <li><strong>Personalization:</strong> each user's pronunciation habits and history are injected
+      as memory, so accuracy improves with use.</li>
+  </ul>
+
+  <h2>Results</h2>
+  <p>Evaluated on Broca's and transcortical motor sessions from AphasiaBank (4,520 adapted
+    sentences), using BLEURT and BERT cosine similarity. The full system reaches 0.91 cosine
+    similarity — a 10% margin over a text-only LLM — and top-3 candidates cover 80% of intents,
+    close to the top-5 ceiling of 84%. Ablations attribute 30–40% of the gain to contextual and
+    scene information and ~25% to visual speech and expression cues. A Chinese-data test reaches
+    0.83 cosine similarity, showing cross-lingual headroom.</p>
+
+  <div class="fig-row">
+    <figure>
+      <img src="assets/apha-quality.png" alt="Top-K accuracy chart: AphaSpeak outperforms text-only LLM across top-1 to top-5 candidates">
+      <figcaption>Top-K output quality vs a text-only LLM baseline.</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/apha-ablation.png" alt="Ablation study: normalized score gains from scene, context, AVSR, and keyframe modalities">
+      <figcaption>Ablation — every modality contributes.</figcaption>
+    </figure>
+  </div>
+
+  <div class="photo-row">
+    <figure>
+      <img src="assets/apha-fair.jpg" alt="Team presenting AphaSpeak at the 65th National Science Fair">
+      <figcaption>65th National Science Fair, presenting AphaSpeak.</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/apha-clinic.jpg" alt="Interviewing a neurologist about aphasia patients' needs">
+      <figcaption>Interviewing a neurologist — clinical insight shaped the design.</figcaption>
+    </figure>
+  </div>
+
+  <div class="doclinks">
+    <a href="assets/aphaspeak-poster.pdf">Poster (PDF)</a>
+  </div>
+
+  <div class="pager">
+    <a href="index.html">← Home</a>
+    <a href="wispo.html">Inversion attacks on speaker models →</a>
+  </div>
+</article>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span>© 2026 Xuan-Yu Lin</span>
+    <span><a href="mailto:altislin1610@gmail.com">email</a> · <a href="https://github.com/altis1610">github</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
