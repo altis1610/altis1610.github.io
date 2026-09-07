@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>林炫宇 Altis Lin</title>
+<meta name="description" content="林炫宇（Altis Lin）— 台大資訊工程學系學士生。語音與音訊機器學習、模型安全與隱私、LLM 系統。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cg fill='%237a2c2c'%3E%3Crect x='3' y='13' width='3' height='6'/%3E%3Crect x='9' y='8' width='3' height='16'/%3E%3Crect x='15' y='4' width='3' height='24'/%3E%3Crect x='21' y='9' width='3' height='14'/%3E%3Crect x='27' y='14' width='3' height='4'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500&family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<nav class="masthead"><div class="container">
+  <a class="m-brand" href="/zh/index.html">ALTIS LIN</a>
+  <div class="m-nav">
+    <a href="/zh/research.html">研究</a>
+    <a href="/zh/activities.html">活動</a>
+    <a href="/zh/teaching.html">教學</a>
+    <a href="/zh/notes.html">筆記</a>
+  </div>
+  <div class="m-links">
+    <a href="https://github.com/altis1610">GITHUB ↗</a>
+    <a href="mailto:altislin1610@gmail.com">EMAIL ↗</a>
+    <a class="m-lang" href="/index.html">EN</a>
+  </div>
+</div></nav>
+
+<main>
+<div class="container hero">
+  <div>
+    <h1>Altis Lin <span class="zh">林炫宇</span></h1>
+    <p class="role">台大資訊工程學系 學士生</p>
+    <p class="intro">我的興趣是語音與音訊機器學習、模型安全與隱私，以及 LLM 系統。主要使用 Python / PyTorch 與 C++，在語音辨識、電腦視覺與低延遲系統設計上都有實作經驗。</p>
+    <div class="chips">
+      <div class="chip">Python</div>
+      <div class="chip">PyTorch</div>
+      <div class="chip">C/C++</div>
+      <div class="chip">Speech &amp; Audio ML</div>
+      <div class="chip">LLMs &amp; Prompting</div>
+      <div class="chip">Computer Vision</div>
+      <div class="chip">APCS 5/5</div>
+    </div>
+    <div class="timeline">
+      <span class="yr">2026 —</span>
+      <span>國立臺灣大學 資訊工程學系 學士（預計 2030 畢業）</span>
+      <span class="yr">2023 — 26</span>
+      <span>國立花蓮高級中學 數理資優班</span>
+    </div>
+  </div>
+  <img class="hero-photo" src="/assets/photo.jpg" alt="Altis Lin">
+</div>
+
+<div class="container" style="padding-top: 56px;">
+  <div class="sec-rule sec-head">
+    <h2>研究</h2>
+    <a class="more" href="/zh/research.html">所有研究 →</a>
+  </div>
+  <div class="rgrid">
+    <a class="rcard" href="/zh/aphaspeak.html">
+      <div class="kicker">2025 – 2026 · ISEF 2026 台灣代表</div>
+      <div class="title">AphaSpeak——失語症多模態溝通輔助系統</div>
+      <p>即時多模態 LLM 系統：在原始 ASR 之上疊加唇語、手勢與表情線索、場景脈絡，從破碎的失語症語句還原患者想說的話。延遲 18 秒 → 4 秒內。</p>
+      <img src="/assets/apha-cover.png" alt="AphaSpeak system design">
+      <span class="go">閱讀全文 →</span>
+    </a>
+    <a class="rcard" href="/zh/wispo.html">
+      <div class="kicker">2024 – 2025 · 第一作者 · WISPO 銀牌</div>
+      <div class="title">語音模型逆向攻擊架構分析與防禦策略探討</div>
+      <p>架構如何決定語音模型洩漏什麼：對 MFCC、SincNet、raw-waveform 三種模型做梯度逆向攻擊，找到 1.6–2.0 秒的防禦甜蜜點，以及差分隱私真正有效的條件。</p>
+      <img src="/assets/wispo-cover.png" alt="Experiment design">
+      <span class="go">閱讀全文 →</span>
+    </a>
+  </div>
+</div>
+
+<div class="container" style="padding-top: 56px;">
+  <div class="sec-rule sec-head">
+    <h2>程式專案</h2>
+    <a class="more" href="https://github.com/altis1610">GITHUB 全部專案 →</a>
+  </div>
+  <div class="sprow">
+    <div>
+      <div class="name"><a href="/zh/bug-track.html">Bug_Track</a></div>
+      <div class="lang">Python · OpenCV · Tkinter GUI</div>
+    </div>
+    <div>
+      <p>用電腦視覺從野外錄影自動找出蜘蛛網獵食事件——生物研究者不用再人工看完數週影片。 <a href="/zh/bug-track.html" style="color: #7a2c2c;">閱讀全文 →</a></p>
+    </div>
+    <a class="btn-line" href="https://github.com/altis1610/Bug_Track">GITHUB ↗</a>
+  </div>
+  <div class="sprow">
+    <div>
+      <div class="name"><a href="/zh/ebook2pdf.html">ebook2pdf</a></div>
+      <div class="lang">Python · automation</div>
+    </div>
+    <div>
+      <p>自動翻頁、截圖、裁邊，把線上電子書整理成乾淨可離線閱讀的 PDF。 <a href="/zh/ebook2pdf.html" style="color: #7a2c2c;">閱讀全文 →</a></p>
+    </div>
+    <a class="btn-line" href="https://github.com/altis1610/ebook2pdf">GITHUB ↗</a>
+  </div>
+</div>
+
+<div class="container" style="padding-top: 56px;">
+  <div class="sec-rule"><h2>最新文章</h2></div>
+  <div class="pgrid3">
+<a class="pcard" href="/zh/reading-group.html">
+  <div class="pcard-cover"><img src="/assets/reading-group.jpg" alt=""></div>
+  <div class="pcard-body">
+    <div class="meta">2025 – 26 · 教學</div>
+    <div class="title">深度學習讀書會</div>
+    <p>和兩位同學合辦的讀書會——AI 這條軌全部由我負責。</p>
+    <span class="read">閱讀 →</span>
+  </div>
+</a>
+<a class="pcard" href="/zh/symposium.html">
+  <div class="pcard-cover"><img src="/assets/symposium.jpg" alt=""></div>
+  <div class="pcard-body">
+    <div class="meta">2025 · 活動</div>
+    <div class="title">校際聯合數理專題成果發表會</div>
+    <p>上台報告自己的研究——也講研究卡關時到底怎麼解。</p>
+    <span class="read">閱讀 →</span>
+  </div>
+</a>
+<a class="pcard" href="/zh/volunteer.html">
+  <div class="pcard-cover"><img src="/assets/volunteer.jpg" alt=""></div>
+  <div class="pcard-body">
+    <div class="meta">2023 – 24 · 活動</div>
+    <div class="title">黎明教養院志工教學</div>
+    <p>用圖像代替符號，教加減法。</p>
+    <span class="read">閱讀 →</span>
+  </div>
+</a>
+  </div>
+  <div class="plist">
+<a href="/zh/infosec.html">
+  <span class="date">2024 – 26</span>
+  <span class="cat">教學</span>
+  <span class="t">資安研究社教學組長</span>
+  <span class="read">閱讀 →</span>
+</a>
+<a href="/zh/arpha.html">
+  <span class="date">2023</span>
+  <span class="cat">教學</span>
+  <span class="t">阿爾法自然筆記</span>
+  <span class="read">閱讀 →</span>
+</a>
+  </div>
+</div>
+
+<div class="container" style="padding-top: 56px; padding-bottom: 16px;">
+  <div class="sec-rule"><h2>獲獎紀錄</h2></div>
+  <div class="honors">
+    <div class="honor"><span class="yr">2026</span><span class="t">美國國際科技展覽會（ISEF）台灣代表</span></div>
+    <div class="honor"><span class="yr">2026</span><span class="t">臺灣國際科學展覽會 電腦科學與資訊工程科 一等獎</span></div>
+    <div class="honor"><span class="yr">2025</span><span class="t">WISPO 世界創新科學專題奧林匹亞 銀牌</span></div>
+    <div class="honor"><span class="yr">2025</span><span class="t">全國中小學科展 第三名・微軟少年英雄獎</span></div>
+    <div class="honor"><span class="yr">2025</span><span class="t">第 22 屆育秀盃決賽 金獎・旺宏科學獎 佳作</span></div>
+    <div class="honor"><span class="yr">2024</span><span class="t">東華盃程式設計競賽 高中組冠軍</span></div>
+  </div>
+</div>
+</main>
+<footer class="sitefoot"><div class="container">
+  <span>altislin1610@gmail.com</span>
+  <span>github.com/altis1610</span>
+  <span>花蓮 → 台北</span>
+</div></footer>
+</body>
+</html>

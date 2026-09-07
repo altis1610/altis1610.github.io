@@ -7,8 +7,8 @@
   --mid: #cccccc;
   --hair: #e2e2e2;
   --wash: #faf7f5;
-  --serif: "Newsreader", Georgia, serif;
-  --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  --serif: "Newsreader", "Noto Serif TC", Georgia, serif;
+  --mono: "IBM Plex Mono", "Noto Sans TC", ui-monospace, SFMono-Regular, monospace;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
@@ -213,3 +213,16 @@ figcaption { margin-top: 8px; font-size: 13.5px; color: #777; font-style: italic
   .pageh1 { font-size: 36px; }
   .gallery figure img { height: auto; }
 }
+
+/* ---------- blog-style post body ---------- */
+.post-body { margin-top: 36px; border-top: 1px solid var(--ink); }
+.post-body h2 { font-size: 25px; font-weight: 600; line-height: 1.3; margin: 44px 0 4px; }
+.post-body h3 { font-size: 19px; font-weight: 600; margin: 28px 0 2px; }
+.post-body p { margin-top: 12px; font-size: 17.5px; line-height: 1.75; color: var(--body); text-wrap: pretty; }
+.post-body ul { margin: 12px 0 0 22px; }
+.post-body li { margin-top: 8px; font-size: 17px; line-height: 1.7; color: var(--body); }
+.post-body li::marker { color: var(--accent); }
+/* concise home side-project rows */
+.sprow-lite { grid-template-columns: 300px minmax(0, 1fr) auto; }
+.m-lang { font-family: var(--mono); font-size: 13px; color: #444; border: 1px solid var(--mid); padding: 3px 10px; }
+.m-lang:hover { border-color: var(--accent); color: var(--accent); opacity: 1; }

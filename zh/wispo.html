@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>語音模型逆向攻擊 — 林炫宇</title>
+<meta name="description" content="Inversion attacks and defenses on speaker classification models.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cg fill='%237a2c2c'%3E%3Crect x='3' y='13' width='3' height='6'/%3E%3Crect x='9' y='8' width='3' height='16'/%3E%3Crect x='15' y='4' width='3' height='24'/%3E%3Crect x='21' y='9' width='3' height='14'/%3E%3Crect x='27' y='14' width='3' height='4'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500&family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<nav class="masthead"><div class="container">
+  <a class="m-brand" href="/zh/index.html">ALTIS LIN</a>
+  <div class="m-nav">
+    <a href="/zh/research.html" class="on">研究</a>
+    <a href="/zh/activities.html">活動</a>
+    <a href="/zh/teaching.html">教學</a>
+    <a href="/zh/notes.html">筆記</a>
+  </div>
+  <div class="m-links">
+    <a href="https://github.com/altis1610">GITHUB ↗</a>
+    <a href="mailto:altislin1610@gmail.com">EMAIL ↗</a>
+    <a class="m-lang" href="/wispo.html">EN</a>
+  </div>
+</div></nav>
+
+<main>
+<div class="narrow" style="padding-top: 56px; padding-bottom: 16px;">
+  <div class="crumbs"><a href="/zh/index.html">首頁</a> / <a href="/zh/research.html">研究</a> / <span class="here">語音模型逆向</span></div>
+  <p class="kicker" style="margin-top: 24px;">2024 – 2025 · 第一作者 · 電腦科學與資訊工程</p>
+  <h1 class="dt-h1">語音模型逆向攻擊架構分析與防禦策略探討</h1>
+  <div class="badges" style="margin-top: 18px;">
+    <span class="badge-solid">WISPO 2025 銀牌</span>
+    <span class="badge-line">臺灣國際科展 三等獎</span>
+    <span class="badge-line">全國科展 佳作</span>
+    <span class="badge-line">D-Link 友訊智慧生活創意獎</span>
+  </div>
+  <div class="toplinks">
+    <a class="btn-line" href="/assets/wispo-paper.pdf">完整論文 (PDF) ↗</a>
+  </div>
+
+  <div class="dt-sec first">
+    <h2 class="sec-h">問題</h2>
+    <p>深偽語音詐騙需要具代表性的語者特徵——而模型逆向攻擊可以直接從訓練好的辨識模型重建它們，還原音色、節奏與口音。過往研究很少問：模型<em>架構本身</em>如何決定這個脆弱度？我以第一作者主導研究設計與核心實驗，正面回答這個問題。</p>
+  </div>
+  <div class="dt-sec">
+    <h2 class="sec-h">方法</h2>
+    <p>我們攻擊三種目標架構——MFCC 管線、可學習 sinc 濾波器的 SincNet、raw-waveform CNN——用白盒梯度逆向：迭代修正合成輸入直到模型輸出符合目標語者，並比較傳統與滑動遮罩兩種演算法。防禦端採後訓練差分隱私層（top-k 取樣＋指數機制）。當 GAN 式攻擊出現震盪時，我開兩條平行路線——一邊診斷 GAN、一邊改寫成受限梯度優化——讓數據決定勝負，兩週內清掉瓶頸。</p>
+    <figure>
+      <img src="/assets/wispo-cover.png" alt="Experiment design and attack algorithm">
+      <figcaption>圖一——實驗設計與攻擊演算法。</figcaption>
+    </figure>
+  </div>
+  <div class="dt-sec">
+    <h2 class="sec-h">發現</h2>
+    <div class="fgrid">
+      <div class="fbox"><div class="t">架構本身就是防線</div><p>深層 raw-waveform 模型最抗逆向；SincNet 在收斂與防禦間取得平衡；MFCC 太早丟棄資訊，洩漏得最快。</p></div>
+      <div class="fbox"><div class="t">防禦甜蜜點</div><p>1.6–2.0 秒的輸入長度，在辨識效能與抗逆向之間取得最佳平衡。</p></div>
+      <div class="fbox"><div class="t">差分隱私是放大器，不是護盾</div><p>DP 能強化本就穩健的架構，但救不了脆弱的 MFCC 基線。</p></div>
+      <div class="fbox"><div class="t">設計原則</div><p>綜合以上，為隱私保護的語者辨識系統提供架構層級的設計指引。</p></div>
+    </div>
+  </div>
+  <div class="dt-sec">
+    <h2 class="sec-h">相簿</h2>
+    <div class="gallery">
+      <figure><img src="/assets/wispo-tisf.jpg" alt="Taiwan International Science Fair" style="object-position: top;"><figcaption>2025 臺灣國際科學展覽會。</figcaption></figure>
+    </div>
+  </div>
+  <div class="pager">
+    <a href="/zh/research.html">← 所有研究</a>
+    <a href="/zh/aphaspeak.html">下一篇：APHASPEAK →</a>
+  </div>
+</div>
+</main>
+<footer class="sitefoot"><div class="container">
+  <span>altislin1610@gmail.com</span>
+  <span>github.com/altis1610</span>
+  <span>花蓮 → 台北</span>
+</div></footer>
+</body>
+</html>

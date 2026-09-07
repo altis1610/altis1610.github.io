@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AphaSpeak — 林炫宇</title>
+<meta name="description" content="AphaSpeak: multimodal communication assistance for aphasia.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cg fill='%237a2c2c'%3E%3Crect x='3' y='13' width='3' height='6'/%3E%3Crect x='9' y='8' width='3' height='16'/%3E%3Crect x='15' y='4' width='3' height='24'/%3E%3Crect x='21' y='9' width='3' height='14'/%3E%3Crect x='27' y='14' width='3' height='4'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500&family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<nav class="masthead"><div class="container">
+  <a class="m-brand" href="/zh/index.html">ALTIS LIN</a>
+  <div class="m-nav">
+    <a href="/zh/research.html" class="on">研究</a>
+    <a href="/zh/activities.html">活動</a>
+    <a href="/zh/teaching.html">教學</a>
+    <a href="/zh/notes.html">筆記</a>
+  </div>
+  <div class="m-links">
+    <a href="https://github.com/altis1610">GITHUB ↗</a>
+    <a href="mailto:altislin1610@gmail.com">EMAIL ↗</a>
+    <a class="m-lang" href="/aphaspeak.html">EN</a>
+  </div>
+</div></nav>
+
+<main>
+<div class="narrow" style="padding-top: 56px; padding-bottom: 16px;">
+  <div class="crumbs"><a href="/zh/index.html">首頁</a> / <a href="/zh/research.html">研究</a> / <span class="here">APHASPEAK</span></div>
+  <p class="kicker" style="margin-top: 24px;">2025 – 2026 · 電腦科學與資訊工程</p>
+  <h1 class="dt-h1">AphaSpeak——失語症多模態溝通輔助系統</h1>
+  <div class="badges" style="margin-top: 18px;">
+    <span class="badge-solid">ISEF 2026 台灣代表</span>
+    <span class="badge-line">臺灣國際科展 一等獎</span>
+    <span class="badge-line">全國科展 第三名</span>
+    <span class="badge-line">微軟少年英雄獎</span>
+    <span class="badge-line">康寧創新獎 特優</span>
+  </div>
+  <div class="toplinks">
+    <a class="btn-line" href="/assets/aphaspeak-poster.pdf">海報 (PDF) ↗</a>
+  </div>
+
+  <div class="dt-sec first">
+    <h2 class="sec-h">問題</h2>
+    <p>腦傷造成的失語症讓溝通嚴重受阻。現有 AAC 輔具靠逐一點選圖卡組句——慢、認知負荷高，也涵蓋不了真實情境。純文字 LLM 方法建立在乾淨的人工轉錄之上；實際臨床裡患者口齒模糊，ASR 原始輸出破碎且歧義，單一模態根本補不齊還原意圖需要的線索。</p>
+  </div>
+  <div class="dt-sec">
+    <h2 class="sec-h">方法</h2>
+    <p>AphaSpeak 把三路訊號融合進同一個 LLM prompt：<em>語音表徵</em>——Whisper ASR 與 ViSpeR 唇語辨識互相驗證、釐清模糊音素；<em>表情行為</em>——ORB 挑出關鍵幀送手勢與情緒偵測（Xception），再拼成行為膠卷；<em>情境與場景</em>——環境音轉錄、場景影像、由歷史摘要出的患者習慣做個人化發音校正。經精簡思維鏈融合後，輸出依信心排序的候選句，患者一鍵確認。</p>
+    <figure>
+      <img src="/assets/apha-cover.png" alt="AphaSpeak system design">
+      <figcaption>圖一——系統設計：三路模態訊號融合進 LLM prompt。</figcaption>
+    </figure>
+  </div>
+  <div class="dt-sec">
+    <h2 class="sec-h">系統工程</h2>
+    <p>第一版原型每句要 18 秒——對話中根本不可用。我把管線改建為非同步 WebSocket 串流、三層優先權任務佇列、多進程模型隔離繞開 Python GIL，在低成本硬體上把端到端延遲壓到 4 秒內——接近自然對話的節奏。</p>
+  </div>
+  <div class="dt-sec">
+    <h2 class="sec-h">結果</h2>
+    <div class="mgrid">
+      <div class="mbox"><div class="n">0.61</div><div class="l">BLEURT-20</div></div>
+      <div class="mbox"><div class="n">0.91</div><div class="l">餘弦相似度</div></div>
+      <div class="mbox"><div class="n">&lt; 4 秒</div><div class="l">延遲（原 18 秒）</div></div>
+      <div class="mbox"><div class="n">80%</div><div class="l">TOP-3 準確率（TOP-1：64%）</div></div>
+    </div>
+    <p style="margin-top: 18px;">在 AphasiaBank 改編的 4,520 句語料（Broca 氏與皮質運動性失語症）上做消融實驗：情境與場景資訊貢獻 30–40% 提升；ViSpeR 加表情行為線索再貢獻約 25%。完整系統穩定領先純文字 LLM 約 10%。</p>
+  </div>
+  <div class="dt-sec">
+    <h2 class="sec-h">相簿</h2>
+    <div class="gallery">
+      <figure><img src="/assets/apha-fair.jpg" alt="Presenting AphaSpeak"><figcaption>第 65 屆全國科展——發表 AphaSpeak。</figcaption></figure>
+      <figure><img src="/assets/apha-clinic.jpg" alt="Clinician interview"><figcaption>神經內科醫師訪談——臨床洞察決定了設計方向。</figcaption></figure>
+    </div>
+  </div>
+  <div class="pager">
+    <a href="/zh/research.html">← 所有研究</a>
+    <a href="/zh/wispo.html">下一篇：語音模型逆向 →</a>
+  </div>
+</div>
+</main>
+<footer class="sitefoot"><div class="container">
+  <span>altislin1610@gmail.com</span>
+  <span>github.com/altis1610</span>
+  <span>花蓮 → 台北</span>
+</div></footer>
+</body>
+</html>

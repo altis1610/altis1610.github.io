@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bug_Track — Altis Lin</title>
+<meta name="description" content="把數週的人工看片，換成電腦視覺自動掃描。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cg fill='%237a2c2c'%3E%3Crect x='3' y='13' width='3' height='6'/%3E%3Crect x='9' y='8' width='3' height='16'/%3E%3Crect x='15' y='4' width='3' height='24'/%3E%3Crect x='21' y='9' width='3' height='14'/%3E%3Crect x='27' y='14' width='3' height='4'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500&family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<nav class="masthead"><div class="container">
+  <a class="m-brand" href="/zh/index.html">ALTIS LIN</a>
+  <div class="m-nav">
+    <a href="/zh/research.html">研究</a>
+    <a href="/zh/activities.html">活動</a>
+    <a href="/zh/teaching.html">教學</a>
+    <a href="/zh/notes.html">筆記</a>
+  </div>
+  <div class="m-links">
+    <a href="https://github.com/altis1610">GITHUB ↗</a>
+    <a href="mailto:altislin1610@gmail.com">EMAIL ↗</a>
+    <a class="m-lang" href="/bug-track.html">EN</a>
+  </div>
+</div></nav>
+
+<main>
+<div class="postw" style="padding-top: 56px; padding-bottom: 16px;">
+  <div class="crumbs"><a href="/zh/index.html">首頁</a> / <span class="here">BUG_TRACK</span></div>
+  <p class="kicker" style="margin-top: 24px;">程式專案 · Python · OpenCV · Tkinter GUI</p>
+  <h1 class="dt-h1">Bug_Track——野外生態影片的事件偵測工具</h1>
+  <p class="post-dek">把數週的人工看片，換成電腦視覺自動掃描。</p>
+  <div class="toplinks">
+    <a class="btn-line" href="https://github.com/altis1610/Bug_Track">GITHUB ↗</a>
+  </div>
+  <div class="post-body">
+  <h2>它解決什麼問題</h2>
+  <p>生物組的朋友在研究蜘蛛網形狀是否影響捕食效率——這代表數週的野外監控影片要人工逐段看完，而且不同觀察者對「怎樣算一次捕食」常常意見不一。現成的偵測模型（如 YOLO）行不通：野外光照變化劇烈，標註好的昆蟲樣本又太少，根本不夠訓練。</p>
+  <h2>系統怎麼運作</h2>
+  <ul><li>長影片先切段處理，控制記憶體用量、維持穩定性</li><li>比較前先做影像處理，壓掉光照變化的干擾</li><li>計算幀間差異捕捉動態</li><li>連續超過閾值的影格合併成單一事件——一次捕食不會被數成五次</li><li>Tkinter 圖形介面讓沒有資訊背景的研究者也能自己調參數、驗證結果</li></ul>
+  <h2>成果</h2>
+  <p>這個工具取代了大部分人工標註，也終結了觀察者之間的判讀分歧——數字不再取決於「是誰在看影片」。</p>
+  </div>
+  <div class="pager">
+    <a href="/zh/index.html">← 首頁</a>
+  </div>
+</div>
+</main>
+<footer class="sitefoot"><div class="container">
+  <span>altislin1610@gmail.com</span>
+  <span>github.com/altis1610</span>
+  <span>花蓮 → 台北</span>
+</div></footer>
+</body>
+</html>

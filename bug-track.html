@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bug_Track — Altis Lin</title>
+<meta name="description" content="Replacing weeks of manual footage review with computer vision.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cg fill='%237a2c2c'%3E%3Crect x='3' y='13' width='3' height='6'/%3E%3Crect x='9' y='8' width='3' height='16'/%3E%3Crect x='15' y='4' width='3' height='24'/%3E%3Crect x='21' y='9' width='3' height='14'/%3E%3Crect x='27' y='14' width='3' height='4'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500&family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<nav class="masthead"><div class="container">
+  <a class="m-brand" href="/index.html">ALTIS LIN</a>
+  <div class="m-nav">
+    <a href="/research.html">RESEARCH</a>
+    <a href="/activities.html">ACTIVITIES</a>
+    <a href="/teaching.html">TEACHING</a>
+    <a href="/notes.html">NOTES</a>
+  </div>
+  <div class="m-links">
+    <a href="https://github.com/altis1610">GITHUB ↗</a>
+    <a href="mailto:altislin1610@gmail.com">EMAIL ↗</a>
+    <a class="m-lang" href="/zh/bug-track.html">中文</a>
+  </div>
+</div></nav>
+
+<main>
+<div class="postw" style="padding-top: 56px; padding-bottom: 16px;">
+  <div class="crumbs"><a href="/index.html">HOME</a> / <span class="here">BUG_TRACK</span></div>
+  <p class="kicker" style="margin-top: 24px;">SIDE PROJECTS · Python · OpenCV · Tkinter GUI</p>
+  <h1 class="dt-h1">Bug_Track — event detection for field-biology videos</h1>
+  <p class="post-dek">Replacing weeks of manual footage review with computer vision.</p>
+  <div class="toplinks">
+    <a class="btn-line" href="https://github.com/altis1610/Bug_Track">GITHUB ↗</a>
+  </div>
+  <div class="post-body">
+  <h2>The problem it solves</h2>
+  <p>A friend in the biology program was studying whether spider-web geometry affects predation efficiency — which meant weeks of camera footage reviewed by hand, with observers often disagreeing on what counted as an event. Off-the-shelf detectors like YOLO were out: outdoor lighting shifts wildly and there were too few labeled insect samples to train on.</p>
+  <h2>How it works</h2>
+  <ul><li>Splits long videos into segments to keep memory bounded and processing stable</li><li>Applies image processing to suppress lighting changes before comparison</li><li>Computes inter-frame differences to catch motion</li><li>Merges consecutive above-threshold frames into single events, so one catch is not counted five times</li><li>A Tkinter GUI lets researchers with no CS background tune parameters and verify results</li></ul>
+  <h2>Outcome</h2>
+  <p>The tool replaced most of the manual annotation and settled the between-observer disagreement — the counts stopped depending on who watched the video.</p>
+  </div>
+  <div class="pager">
+    <a href="/index.html">← HOME</a>
+  </div>
+</div>
+</main>
+<footer class="sitefoot"><div class="container">
+  <span>altislin1610@gmail.com</span>
+  <span>github.com/altis1610</span>
+  <span>Hualien → Taipei, Taiwan</span>
+</div></footer>
+</body>
+</html>

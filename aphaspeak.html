@@ -4,31 +4,32 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AphaSpeak — Altis Lin</title>
-<meta name="description" content="AphaSpeak: multimodal communication assistance for aphasia. ISEF 2026 finalist, Taiwan International Science Fair First Award.">
+<meta name="description" content="AphaSpeak: multimodal communication assistance for aphasia.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cg fill='%237a2c2c'%3E%3Crect x='3' y='13' width='3' height='6'/%3E%3Crect x='9' y='8' width='3' height='16'/%3E%3Crect x='15' y='4' width='3' height='24'/%3E%3Crect x='21' y='9' width='3' height='14'/%3E%3Crect x='27' y='14' width='3' height='4'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500&family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
 </head>
 <body>
 <nav class="masthead"><div class="container">
-  <a class="m-brand" href="index.html">ALTIS LIN</a>
+  <a class="m-brand" href="/index.html">ALTIS LIN</a>
   <div class="m-nav">
-    <a href="research.html" class="on">RESEARCH</a>
-    <a href="activities.html">ACTIVITIES</a>
-    <a href="teaching.html">TEACHING</a>
-    <a href="notes.html">NOTES</a>
+    <a href="/research.html" class="on">RESEARCH</a>
+    <a href="/activities.html">ACTIVITIES</a>
+    <a href="/teaching.html">TEACHING</a>
+    <a href="/notes.html">NOTES</a>
   </div>
   <div class="m-links">
     <a href="https://github.com/altis1610">GITHUB ↗</a>
     <a href="mailto:altislin1610@gmail.com">EMAIL ↗</a>
+    <a class="m-lang" href="/zh/aphaspeak.html">中文</a>
   </div>
 </div></nav>
 
 <main>
 <div class="narrow" style="padding-top: 56px; padding-bottom: 16px;">
-  <div class="crumbs"><a href="index.html">HOME</a> / <a href="research.html">RESEARCH</a> / <span class="here">APHASPEAK</span></div>
+  <div class="crumbs"><a href="/index.html">HOME</a> / <a href="/research.html">RESEARCH</a> / <span class="here">APHASPEAK</span></div>
   <p class="kicker" style="margin-top: 24px;">2025 – 2026 · CS &amp; INFORMATION</p>
   <h1 class="dt-h1">AphaSpeak — Multimodal Communication Assistance for Aphasia</h1>
   <div class="badges" style="margin-top: 18px;">
@@ -39,41 +40,25 @@
     <span class="badge-line">Corning Innovation Award</span>
   </div>
   <div class="toplinks">
-    <a class="btn-line" href="assets/aphaspeak-poster.pdf">POSTER (PDF) ↗</a>
+    <a class="btn-line" href="/assets/aphaspeak-poster.pdf">POSTER (PDF) ↗</a>
   </div>
 
   <div class="dt-sec first">
     <h2 class="sec-h">PROBLEM</h2>
-    <p>Aphasia from brain damage creates severe communication barriers. Existing AAC tools rely on
-      sequential symbol selection — slow, cognitively heavy, and unable to cover real-world
-      scenarios. Text-only LLM approaches work on clean, human-annotated transcripts; in real
-      clinical use, slurred speech makes raw ASR output broken and ambiguous, and a single modality
-      misses the cues needed to recover intent.</p>
+    <p>Aphasia from brain damage creates severe communication barriers. Existing AAC tools rely on sequential symbol selection — slow, cognitively heavy, and unable to cover real-world scenarios. Text-only LLM approaches work on clean, human-annotated transcripts; in real clinical use, slurred speech makes raw ASR output broken and ambiguous, and a single modality misses the cues needed to recover intent.</p>
   </div>
-
   <div class="dt-sec">
     <h2 class="sec-h">APPROACH</h2>
-    <p>AphaSpeak fuses three streams into one LLM prompt: <em>speech representation</em> — Whisper
-      ASR cross-verified with ViSpeR lip-reading to resolve ambiguous phonemes; <em>expression
-      behavior</em> — ORB-selected keyframes feeding gesture and emotion detection (Xception), plus
-      a filmstrip of actions; and <em>contextual &amp; scene information</em> — ambient-audio
-      transcripts, scene images, and patient habits summarized from history for personalized
-      pronunciation correction. A concise chain-of-thought fusion produces ranked candidate
-      sentences the patient confirms with one tap.</p>
+    <p>AphaSpeak fuses three streams into one LLM prompt: <em>speech representation</em> — Whisper ASR cross-verified with ViSpeR lip-reading to resolve ambiguous phonemes; <em>expression behavior</em> — ORB-selected keyframes feeding gesture and emotion detection (Xception), plus a filmstrip of actions; and <em>contextual &amp; scene information</em> — ambient-audio transcripts, scene images, and patient habits summarized from history for personalized pronunciation correction. A concise chain-of-thought fusion produces ranked candidate sentences the patient confirms with one tap.</p>
     <figure>
-      <img src="assets/apha-cover.png" alt="AphaSpeak system design">
+      <img src="/assets/apha-cover.png" alt="AphaSpeak system design">
       <figcaption>Fig. 1 — System design: three modality streams fused into an LLM prompt.</figcaption>
     </figure>
   </div>
-
   <div class="dt-sec">
     <h2 class="sec-h">SYSTEMS ENGINEERING</h2>
-    <p>The first prototype took 18 seconds per utterance — unusable in conversation. I rebuilt the
-      pipeline around asynchronous WebSocket streaming, a three-tier priority task queue, and
-      multi-process model isolation to work around the Python GIL, bringing end-to-end latency under
-      4 seconds — close to natural conversational pace — on low-cost hardware.</p>
+    <p>The first prototype took 18 seconds per utterance — unusable in conversation. I rebuilt the pipeline around asynchronous WebSocket streaming, a three-tier priority task queue, and multi-process model isolation to work around the Python GIL, bringing end-to-end latency under 4 seconds — close to natural conversational pace — on low-cost hardware.</p>
   </div>
-
   <div class="dt-sec">
     <h2 class="sec-h">RESULTS</h2>
     <div class="mgrid">
@@ -82,23 +67,18 @@
       <div class="mbox"><div class="n">&lt; 4 s</div><div class="l">LATENCY (FROM 18 S)</div></div>
       <div class="mbox"><div class="n">80%</div><div class="l">TOP-3 ACC (TOP-1: 64%)</div></div>
     </div>
-    <p style="margin-top: 18px;">Ablations on 4,520 adapted AphasiaBank sentences (Broca's and
-      transcortical motor aphasia): contextual and scene information contribute a 30–40%
-      improvement; ViSpeR plus expression-behavior cues add another 25%. The full system
-      consistently beats a text-only LLM by ~10%.</p>
+    <p style="margin-top: 18px;">Ablations on 4,520 adapted AphasiaBank sentences (Broca's and transcortical motor aphasia): contextual and scene information contribute a 30–40% improvement; ViSpeR plus expression-behavior cues add another 25%. The full system consistently beats a text-only LLM by ~10%.</p>
   </div>
-
   <div class="dt-sec">
     <h2 class="sec-h">GALLERY</h2>
     <div class="gallery">
-      <figure><img src="assets/apha-fair.jpg" alt="Presenting AphaSpeak at the 65th National Science Fair"><figcaption>65th National Science Fair — presenting AphaSpeak.</figcaption></figure>
-      <figure><img src="assets/apha-clinic.jpg" alt="Interviewing a neurologist"><figcaption>Clinician interview — neurologist insights shaped the design.</figcaption></figure>
+      <figure><img src="/assets/apha-fair.jpg" alt="Presenting AphaSpeak"><figcaption>65th National Science Fair — presenting AphaSpeak.</figcaption></figure>
+      <figure><img src="/assets/apha-clinic.jpg" alt="Clinician interview"><figcaption>Clinician interview — neurologist insights shaped the design.</figcaption></figure>
     </div>
   </div>
-
   <div class="pager">
-    <a href="research.html">← ALL RESEARCH</a>
-    <a href="wispo.html">NEXT: VOICE MODEL INVERSION →</a>
+    <a href="/research.html">← ALL RESEARCH</a>
+    <a href="/wispo.html">NEXT: VOICE MODEL INVERSION →</a>
   </div>
 </div>
 </main>

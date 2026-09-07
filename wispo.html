@@ -4,31 +4,32 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Voice Model Inversion — Altis Lin</title>
-<meta name="description" content="Analysis of inversion attack and defense strategies on speaker classification models. WISPO 2025 Silver Medal, first author.">
+<meta name="description" content="Inversion attacks and defenses on speaker classification models.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cg fill='%237a2c2c'%3E%3Crect x='3' y='13' width='3' height='6'/%3E%3Crect x='9' y='8' width='3' height='16'/%3E%3Crect x='15' y='4' width='3' height='24'/%3E%3Crect x='21' y='9' width='3' height='14'/%3E%3Crect x='27' y='14' width='3' height='4'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500&family=Noto+Serif+TC:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
 </head>
 <body>
 <nav class="masthead"><div class="container">
-  <a class="m-brand" href="index.html">ALTIS LIN</a>
+  <a class="m-brand" href="/index.html">ALTIS LIN</a>
   <div class="m-nav">
-    <a href="research.html" class="on">RESEARCH</a>
-    <a href="activities.html">ACTIVITIES</a>
-    <a href="teaching.html">TEACHING</a>
-    <a href="notes.html">NOTES</a>
+    <a href="/research.html" class="on">RESEARCH</a>
+    <a href="/activities.html">ACTIVITIES</a>
+    <a href="/teaching.html">TEACHING</a>
+    <a href="/notes.html">NOTES</a>
   </div>
   <div class="m-links">
     <a href="https://github.com/altis1610">GITHUB ↗</a>
     <a href="mailto:altislin1610@gmail.com">EMAIL ↗</a>
+    <a class="m-lang" href="/zh/wispo.html">中文</a>
   </div>
 </div></nav>
 
 <main>
 <div class="narrow" style="padding-top: 56px; padding-bottom: 16px;">
-  <div class="crumbs"><a href="index.html">HOME</a> / <a href="research.html">RESEARCH</a> / <span class="here">VOICE MODEL INVERSION</span></div>
+  <div class="crumbs"><a href="/index.html">HOME</a> / <a href="/research.html">RESEARCH</a> / <span class="here">VOICE MODEL INVERSION</span></div>
   <p class="kicker" style="margin-top: 24px;">2024 – 2025 · FIRST AUTHOR · CS &amp; INFORMATION</p>
   <h1 class="dt-h1">Analysis of Inversion Attack and Defense Strategies on Speaker Classification Models</h1>
   <div class="badges" style="margin-top: 18px;">
@@ -38,33 +39,21 @@
     <span class="badge-line">D-Link Innovation Award</span>
   </div>
   <div class="toplinks">
-    <a class="btn-line" href="assets/wispo-paper.pdf">FULL PAPER (PDF) ↗</a>
+    <a class="btn-line" href="/assets/wispo-paper.pdf">FULL PAPER (PDF) ↗</a>
   </div>
 
   <div class="dt-sec first">
     <h2 class="sec-h">PROBLEM</h2>
-    <p>Deepfake voice scams need representative speaker features — and model inversion attacks can
-      reconstruct them directly from a trained recognition model, recovering timbre, rhythm, and
-      accent. Prior work rarely asked how the model's <em>architecture itself</em> governs this
-      vulnerability. As first author I led the research design and core experiments answering
-      exactly that.</p>
+    <p>Deepfake voice scams need representative speaker features — and model inversion attacks can reconstruct them directly from a trained recognition model, recovering timbre, rhythm, and accent. Prior work rarely asked how the model's <em>architecture itself</em> governs this vulnerability. As first author I led the research design and core experiments answering exactly that.</p>
   </div>
-
   <div class="dt-sec">
     <h2 class="sec-h">METHOD</h2>
-    <p>We attacked three target families — MFCC pipelines, SincNet with learnable sinc filters, and
-      raw-waveform CNNs — with white-box, gradient-based inversion: iteratively refining a synthetic
-      input until the model's output matches a target speaker, under traditional and sliding masking
-      algorithms. Defense used a post-training differential-privacy layer (top-k sampling with the
-      exponential mechanism). When our GAN-based attack oscillated, I ran two parallel tracks —
-      diagnosing the GAN vs. reformulating as constrained gradient optimization — and let the data
-      pick the winner, clearing the bottleneck in two weeks.</p>
+    <p>We attacked three target families — MFCC pipelines, SincNet with learnable sinc filters, and raw-waveform CNNs — with white-box, gradient-based inversion: iteratively refining a synthetic input until the model's output matches a target speaker, under traditional and sliding masking algorithms. Defense used a post-training differential-privacy layer (top-k sampling with the exponential mechanism). When our GAN-based attack oscillated, I ran two parallel tracks — diagnosing the GAN vs. reformulating as constrained gradient optimization — and let the data pick the winner, clearing the bottleneck in two weeks.</p>
     <figure>
-      <img src="assets/wispo-cover.png" alt="Experiment design and attack algorithm">
+      <img src="/assets/wispo-cover.png" alt="Experiment design and attack algorithm">
       <figcaption>Fig. 1 — Experiment design and attack algorithm.</figcaption>
     </figure>
   </div>
-
   <div class="dt-sec">
     <h2 class="sec-h">FINDINGS</h2>
     <div class="fgrid">
@@ -74,17 +63,15 @@
       <div class="fbox"><div class="t">Design principles</div><p>Together these establish architecture-level guidance for building privacy-preserving speaker recognition.</p></div>
     </div>
   </div>
-
   <div class="dt-sec">
     <h2 class="sec-h">GALLERY</h2>
     <div class="gallery">
-      <figure><img src="assets/wispo-tisf.jpg" alt="Presenting at the Taiwan International Science Fair" style="object-position: top;"><figcaption>Taiwan International Science Fair 2025.</figcaption></figure>
+      <figure><img src="/assets/wispo-tisf.jpg" alt="Taiwan International Science Fair" style="object-position: top;"><figcaption>Taiwan International Science Fair 2025.</figcaption></figure>
     </div>
   </div>
-
   <div class="pager">
-    <a href="research.html">← ALL RESEARCH</a>
-    <a href="aphaspeak.html">NEXT: APHASPEAK →</a>
+    <a href="/research.html">← ALL RESEARCH</a>
+    <a href="/aphaspeak.html">NEXT: APHASPEAK →</a>
   </div>
 </div>
 </main>
